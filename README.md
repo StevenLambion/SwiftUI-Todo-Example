@@ -18,8 +18,6 @@ Some of the items below are possible now if using a custom built SplitView and d
 
 - Multi-window support with UIScene.
 - Initially selected todo list on iPad.
-  - This is possible with NavigationDestinationLink's `presented` property, but it was deprecated in favor of NavigationLink. NavigationLink doesn't appear to have a state driven option outside of presentation views.
-- Auto-select the newly added to do list. See previous bullet point.
 - Split view navigation button to expand / collapse the master view.
   - This is currently missing. It was also missing in the SwiftUI Essentials video.
 - Remove arrows from master view on iPad.

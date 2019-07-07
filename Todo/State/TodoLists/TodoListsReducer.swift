@@ -1,14 +1,6 @@
 import Foundation
 import SwiftDux
 
-enum TodoListsAction: Action {
-  case setTodoListName(forId: String, name: String)
-  case addTodoList(name: String)
-  case removeTodoLists(at: IndexSet)
-  case moveTodoLists(from: IndexSet, to: Int)
-  case routeTodosAction(listId: String, action: TodosAction)
-}
-
 class TodoListsReducer: Reducer {
   
   let todosReducer = TodosReducer()
@@ -21,8 +13,7 @@ class TodoListsReducer: Reducer {
         todoList.name = name
         state[id] = todoList
       }
-    case .addTodoList(let name):
-      let id = UUID().uuidString
+    case .createTodoList(let name, let id):
       state.append(TodoList(id: id, name: name, todos: OrderedState()))
     case .removeTodoLists(let indexSet):
       state.remove(at: indexSet)

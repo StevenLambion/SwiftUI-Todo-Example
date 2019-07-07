@@ -29,6 +29,7 @@
 		AA9DA96F22AD8FED00617E46 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9DA96E22AD8FED00617E46 /* AppState.swift */; };
 		AA9DA97122AD90B100617E46 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9DA97022AD90B100617E46 /* AppReducer.swift */; };
 		AA9DA97322AD942E00617E46 /* TodoListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9DA97222AD942E00617E46 /* TodoListRow.swift */; };
+		AABF238C22D2B45800F332DC /* TodoListsAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABF238B22D2B45800F332DC /* TodoListsAction.swift */; };
 		AAEBBAD122AF159B0014D88C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AAEBBAD022AF159B0014D88C /* README.md */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,7 @@
 		AA9DA96E22AD8FED00617E46 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		AA9DA97022AD90B100617E46 /* AppReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
 		AA9DA97222AD942E00617E46 /* TodoListRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListRow.swift; sourceTree = "<group>"; };
+		AABF238B22D2B45800F332DC /* TodoListsAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListsAction.swift; sourceTree = "<group>"; };
 		AAEBBAD022AF159B0014D88C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,6 +122,7 @@
 			children = (
 				AA9DA96222AD8B5900617E46 /* TodoList.swift */,
 				AA427B0822C3D097005A4368 /* TodoListsReducer.swift */,
+				AABF238B22D2B45800F332DC /* TodoListsAction.swift */,
 			);
 			path = TodoLists;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				AA9DA94522AD8A2100617E46 /* AppDelegate.swift in Sources */,
 				AA9DA96522AD8BA100617E46 /* Todo.swift in Sources */,
 				AA427B0922C3D097005A4368 /* TodoListsReducer.swift in Sources */,
+				AABF238C22D2B45800F332DC /* TodoListsAction.swift in Sources */,
 				AA9DA96922AD8E4C00617E46 /* TodoRow.swift in Sources */,
 				AA427B0522C31B98005A4368 /* MainScene.swift in Sources */,
 				AA116DCF22D257B10046D5A3 /* TodoListsView.swift in Sources */,

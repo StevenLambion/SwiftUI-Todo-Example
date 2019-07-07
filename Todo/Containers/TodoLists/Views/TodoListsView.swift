@@ -1,22 +1,28 @@
 import SwiftUI
 import SwiftDux
 
-struct TodoListsView<Details> : View where Details : View {
+struct TodoListsView : View {
   @Environment(\.editMode) var mode
   
-  var selectedListId: String?
+  var detailsLink = DynamicNavigationDestinationLink(id: \.id, isDetail: true) { (list: TodoList) in
+    TodosContainer(id: list.id)
+  }
+  
   var todoLists: OrderedState<TodoList>
-  var renderDetailContainer: (TodoList) -> Details
+  
+  @Binding var selectedTodoList: TodoList?
+  
   var onAddTodoList: () -> ()
   var onMoveTodoLists: (IndexSet, Int) -> ()
   var onRemoveTodoLists: (IndexSet) -> ()
   
   var body: some View {
+    detailsLink.presentedData?.value = selectedTodoList
     return (
       List {
         ForEach(todoLists) { list in
-          NavigationLink(destination: self.renderDetailContainer(list)) {
-            TodoListRow(name: list.name, selected: self.selectedListId == list.id)
+          NavigationLink(destination: list, in: self.$selectedTodoList) {
+            TodoListRow(name: list.name, selected: self.selectedTodoList?.id == list.id)
           }
         }
         .onMove(perform: self.onMoveTodoLists)
