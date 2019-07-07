@@ -6,6 +6,8 @@ fileprivate let connector = Connector<AppState> { $0 is TodoListsAction || $0 is
 
 struct TodoListsContainer : View {
   @Environment(\.editMode) var mode
+  
+  /// SwiftUI in beta 3 has a bug in which environment objects can't be accessed through a NavigationLink. Once fixed, these can be removed.
   @EnvironmentObject var storeContext: StoreContext<AppState>
   @EnvironmentObject var dispatcherContext: DispatcherContext
   
