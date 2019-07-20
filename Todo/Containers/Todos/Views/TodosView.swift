@@ -2,6 +2,7 @@ import SwiftUI
 
 struct TodosView : View {
   @State private var editMode: EditMode = .active
+  @Environment(\.horizontalSizeClass) private var horizontalSizeClass
   
   var todoList: TodoList
   var onTodoListNameChange: (String) -> ()
@@ -9,6 +10,7 @@ struct TodosView : View {
   var onAddTodo: () -> ()
   var onMoveTodos: (IndexSet, Int) -> ()
   var onRemoveTodos: (IndexSet) -> ()
+  var onDeselectTodoList: () -> ()
   
   private var todoListName: Binding<String> {
     Binding<String>(
@@ -32,11 +34,27 @@ struct TodosView : View {
     }
     .navigationBarTitle(Text(""), displayMode: .inline)
       .navigationBarItems(
+        leading: self.renderLeadingNavigationButton(),
         trailing: Button(action: self.onAddTodo) {
           Image(systemName: "plus").imageScale(.large).padding()
         }
     )
       .environment(\.editMode, $editMode)
+  }
+  
+  func renderLeadingNavigationButton() -> some View {
+    Group {
+      if horizontalSizeClass == .compact {
+        Button(action: self.onDeselectTodoList) {
+          HStack {
+            Image(systemName: "chevron.left").imageScale(.large)
+            Text("Todo Lists")
+          }
+        }
+      } else {
+        EmptyView()
+      }
+    }
   }
   
 }

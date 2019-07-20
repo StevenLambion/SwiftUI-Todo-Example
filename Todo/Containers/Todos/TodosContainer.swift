@@ -15,7 +15,8 @@ struct TodosContainer : View {
         onTodoTextChange: { dispatcher.send(TodosAction.setText(forId: $0, text: $1)) },
         onAddTodo: { dispatcher.send(TodosAction.addTodo(text: "New Todo")) },
         onMoveTodos: { dispatcher.send(TodosAction.moveTodos(from: $0, to: $1)) },
-        onRemoveTodos: { dispatcher.send(TodosAction.removeTodos(at: $0)) }
+        onRemoveTodos: { dispatcher.send(TodosAction.removeTodos(at: $0)) },
+        onDeselectTodoList: { dispatcher.send(MainSceneAction.selectList(byId: nil)) }
       )
     }
     .modifier(DispatcherProxy { action in
