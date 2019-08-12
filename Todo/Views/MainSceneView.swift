@@ -5,7 +5,7 @@ struct MainSceneView : View {
   
   var body: some View {
     NavigationView {
-      TodoListsContainer()
+      TodoListsContainer().connect()
       AnyView(Text("Select a todo list."))
     }
   }

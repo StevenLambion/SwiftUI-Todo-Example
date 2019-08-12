@@ -2,27 +2,45 @@ import SwiftUI
 import SwiftDux
 import Combine
 
-fileprivate let connector = Connector<AppState> { $0 is TodoListsAction || $0 is MainSceneAction }
-
 struct TodoListsContainer : View {
-  @Environment(\.editMode) var mode
+  @Environment(\.editMode) private var mode
+
+  @MappedState private var props: Props
+  @MappedDispatch() private var dispatch
   
   var body: some View {
-    connector.mapToView { state, dispatcher -> TodoListsView in
-      TodoListsView(
-        todoLists: state.todoLists,
-        selectedTodoList: Binding<TodoList?>(
-          getValue: {
-            guard let id = state.mainScene.selectedListId else { return nil }
-            return state.todoLists[id]
-          },
-          setValue: { dispatcher.send(MainSceneAction.selectList(byId: $0?.id)) }
-        ),
-        onAddTodoList: { dispatcher.send(TodoListsAction.addNewTodoList()) },
-        onMoveTodoLists: { dispatcher.send(TodoListsAction.moveTodoLists(from: $0, to: $1)) },
-        onRemoveTodoLists: { dispatcher.send(TodoListsAction.removeTodoLists(at: $0)) }
-      )
+    renderList()
+    .navigationBarTitle(Text("Todo Lists"))
+    .navigationBarItems(
+      leading: EditButton(),
+      trailing: AddButton { self.dispatch(TodoListsAction.addNewTodoList()) }
+    )
+  }
+  
+  func renderList() -> some View {
+    List {
+      ForEach(props.todoLists) { list in
+        TodoListRowContainer().connect(with: list.id)
+      }
+      .onMove { self.dispatch(TodoListsAction.moveTodoLists(from: $0, to: $1)) }
+      .onDelete { self.dispatch(TodoListsAction.removeTodoLists(at: $0)) }
     }
   }
 
+}
+
+extension TodoListsContainer : Connectable {
+  
+  struct Props {
+    var selectedListId: String?
+    var todoLists: OrderedState<TodoList>
+  }
+  
+  func map(state: AppState) -> Props? {
+    Props(
+      selectedListId: state.mainScene.selectedListId,
+      todoLists: state.todoLists
+    )
+  }
+  
 }
