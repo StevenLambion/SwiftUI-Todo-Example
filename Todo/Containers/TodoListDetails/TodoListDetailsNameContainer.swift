@@ -27,10 +27,6 @@ extension TodoListDetailsNameContainer : Connectable {
     var name: String
   }
   
-  func updateWhen(action: Action) -> Bool {
-    action is TodoListsAction
-  }
-
   func map(state: TodoList) -> Props? {
     Props(
       id: state.id,
