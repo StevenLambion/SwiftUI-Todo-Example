@@ -1,7 +1,7 @@
 import Foundation
 import SwiftDux
 
-class MainSceneReducer: Reducer {
+final class MainSceneReducer: Reducer {
   
   func reduce(state: MainScene, action: MainSceneAction) -> MainScene {
     var state = state

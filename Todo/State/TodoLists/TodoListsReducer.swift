@@ -1,7 +1,7 @@
 import Foundation
 import SwiftDux
 
-class TodoListsReducer: Reducer {
+final class TodoListsReducer: Reducer {
   
   let todosReducer = TodosReducer()
   

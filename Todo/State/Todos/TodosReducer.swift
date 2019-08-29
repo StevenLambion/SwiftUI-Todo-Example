@@ -10,7 +10,7 @@ enum TodosAction: Action {
   case moveTodos(from: IndexSet, to: Int)
 }
 
-class TodosReducer: Reducer {
+final class TodosReducer: Reducer {
   
   func reduce(state: TodoList, action: TodosAction) -> TodoList {
     var state = state

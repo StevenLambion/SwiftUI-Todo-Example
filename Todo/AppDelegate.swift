@@ -12,7 +12,11 @@ import SwiftDux
 @UIApplicationMain
 	class AppDelegate: UIResponder, UIApplicationDelegate {
   
-  let store = Store(state: AppState(),reducer: AppReducer())
+  let store = Store(
+    state: AppState(),
+    reducer: AppReducer(),
+    middleware: PrintActionMiddleware()
+  )
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.

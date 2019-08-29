@@ -1,7 +1,7 @@
 import Foundation
 import SwiftDux
 
-class AppReducer : Reducer {
+final class AppReducer : Reducer {
   
   let mainSceneReducer = MainSceneReducer()
   let todoListsReducer = TodoListsReducer()

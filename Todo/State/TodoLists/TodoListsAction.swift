@@ -12,10 +12,10 @@ enum TodoListsAction: Action {
 extension TodoListsAction {
   
   static func addNewTodoList() -> ActionPlan<AppState> {
-    ActionPlan { send, getState in
+    ActionPlan { store in
       let id = UUID().uuidString
-      send(TodoListsAction.createTodoList(name: "", id: id))
-      send(MainSceneAction.selectList(byId: id))
+      store.send(TodoListsAction.createTodoList(name: "", id: id))
+      store.send(MainSceneAction.selectList(byId: id))
     }
   }
   
