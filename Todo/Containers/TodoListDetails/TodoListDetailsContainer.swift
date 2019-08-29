@@ -7,7 +7,7 @@ struct TodoListDetailsContainer : View {
   @MappedState private var todoList: TodoList
   @MappedDispatch() private var dispatch
   
-  @SwiftUI.State private var editMode: EditMode = .active
+  @SwiftUI.State private var editMode: EditMode = .inactive
   
   var body: some View {
     VStack {
@@ -16,10 +16,13 @@ struct TodoListDetailsContainer : View {
     }
     .navigationBarTitle(Text(""), displayMode: .inline)
       .navigationBarItems(
-        leading: self.renderLeadingNavigationButton(),
+        //leading: self.renderLeadingNavigationButton(),
         trailing: AddButton { self.dispatch(TodosAction.addTodo(text: "New Todo")) }
     )
     .environment(\.editMode, $editMode)
+    .onDisappear {
+      self.dispatch(MainSceneAction.selectList(byId: nil))
+    }
   }
   
   func renderList() -> some View {
@@ -39,6 +42,10 @@ struct TodoListDetailsContainer : View {
 }
   
 extension TodoListDetailsContainer : ParameterizedConnectable {
+  
+  func updateWhen(action: Action, with parameter: String) -> Bool {
+    action is TodosAction
+  }
   
   func map(state: AppState, with parameter: String) -> TodoList? {
     state.todoLists[parameter]

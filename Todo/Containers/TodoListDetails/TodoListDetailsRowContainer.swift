@@ -14,8 +14,15 @@ struct TodoListDetailsRowContainer : View {
     )
   }
   
+  private var completed: Binding<Bool> {
+    Binding<Bool>(
+      get: { self.todo.completed },
+      set: { self.dispatch(TodosAction.setCompleted(forId: self.todo.id, completed: $0)) }
+    )
+  }
+  
   var body: some View {
-    TodoListDetailsRow(text: text)
+    TodoListDetailsRow(completed: completed, text: text)
   }
   
 }

@@ -5,4 +5,5 @@ import SwiftDux
 struct Todo: IdentifiableState, Identifiable {
   var id: String
   var text: String
+  var completed: Bool = false
 }
