@@ -4,10 +4,6 @@ A reference implementation of a todo app to test out SwiftUI using [SwiftDux](ht
 
 <div style="text-align: center">
   <div>
-    <img style="inline" src="./screenshots/todoLists-screenshot.png" width="300"/>
-    <img style="inline" src="./screenshots/todos-screenshot.png" width="300"/>
-  </div>
-  <div>
     <img style="inline" src="./screenshots/todoLists-iPad-screenshot.png" width="600"/>
   </div>
 </div>
