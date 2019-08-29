@@ -1,6 +1,6 @@
 # SwiftDux Todo App
 
-A reference implementation of a todo app to test out SwiftUI using [SwiftDux](https://github.com/StevenLambion/SwiftDux). This example is still a work in progress. There's partial iPad support, but SwiftUI's split view and navigation functionality is still not fully complete.
+A reference implementation of a todo app to test out SwiftUI using [SwiftDux](https://github.com/StevenLambion/SwiftDux). This example is still a work in progress. There's partial iPad support, but SwiftUI's split view and navigation functionality is still not fully complete. It currently requires iOS 13.1 to work properly.
 
 <div style="text-align: center">
   <div>
