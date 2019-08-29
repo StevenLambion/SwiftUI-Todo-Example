@@ -4,6 +4,7 @@ import Combine
 
 struct TodoListsContainer : View {
   @Environment(\.editMode) private var mode
+  @Environment(\.horizontalSizeClass) private var sizeClass
 
   @MappedState private var props: Props
   @MappedDispatch() private var dispatch
@@ -24,6 +25,9 @@ struct TodoListsContainer : View {
       }
       .onMove { self.dispatch(TodoListsAction.moveTodoLists(from: $0, to: $1)) }
       .onDelete { self.dispatch(TodoListsAction.removeTodoLists(at: $0)) }
+    }.onAppear {
+      guard self.props.selectedListId == nil && self.sizeClass == .regular else { return }
+      self.dispatch(MainSceneAction.selectList(byId: self.props.todoLists.first?.id))
     }
   }
 
