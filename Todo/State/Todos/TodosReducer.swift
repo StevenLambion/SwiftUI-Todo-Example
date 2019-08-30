@@ -1,6 +1,5 @@
 
 import Foundation
-import SwiftUI
 import SwiftDux
 
 enum TodosAction: Action {

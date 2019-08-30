@@ -2,22 +2,15 @@
 
 A reference implementation of a todo app to test out SwiftUI using [SwiftDux](https://github.com/StevenLambion/SwiftDux). This example is still a work in progress. There's partial iPad support, but SwiftUI's split view and navigation functionality is still not fully complete. It currently requires iOS 13.1 to work properly.
 
-<div style="text-align: center">
-  <div>
-    <img style="border: 1px solid #aaa; box-shadow: 0px 2px 12px #ccc" src="./screenshots/todoLists-iPad-screenshot.png" width="600"/>
-  </div>
-</div>
+<img src="./screenshots/todoLists-iPad-screenshot.png" width="100%"/>
 
-## Things left to do:
+## Things to do:
 
-Some of the items below are possible now if using a custom built SplitView and deprecated APIs. The point of this project though is to see where SwiftUI is at while it develops. It's still in an early preview stage, so many parts of it are in flux or missing.
+Some of the items below are possible now if using a custom built SplitView and deprecated APIs. The point of this project though is to see what's possible in SwiftUI while it develops.
 
 - Multi-window support with UIScene.
-- Initially selected todo list on iPad.
 - Split view navigation button to expand / collapse the master view.
   - This is currently missing. It was also missing in the SwiftUI Essentials video.
 - Remove arrows from master view on iPad.
   - This is an implemenation detail of NavigationLink.
 - Autofocus text fields when adding a new item.
-- Persist state.
-- Restore previous navigation on relaunch.

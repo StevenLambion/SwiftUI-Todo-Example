@@ -8,14 +8,20 @@
 
 import UIKit
 import SwiftDux
+import SwiftDuxExtras
 
 @UIApplicationMain
 	class AppDelegate: UIResponder, UIApplicationDelegate {
   
-  let store = Store(
+  var store = Store(
     state: AppState(),
     reducer: AppReducer(),
-    middleware: PrintActionMiddleware()
+    middleware: [
+      PrintActionMiddleware(),
+      PersistStateMiddleware(JSONStatePersistor<AppState>()) { state in
+        state.schemaVersion == AppState.currentSchemaVersion
+      }
+    ]
   )
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

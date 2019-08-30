@@ -117,6 +117,14 @@
 			path = TodoListDetails;
 			sourceTree = "<group>";
 		};
+		AA2606122318D3E500B46F56 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				AA2F1A80231782D3003B088A /* CheckedToggleStyle.swift */,
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
 		AA427B0022C31B28005A4368 /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,9 +166,7 @@
 		AA94FB9122F4D0E8008D0272 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				AA427ACB22C143AE005A4368 /* MainSceneView.swift */,
 				AA94FB9B22F4D969008D0272 /* AddButton.swift */,
-				AA2F1A80231782D3003B088A /* CheckedToggleStyle.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -196,6 +202,7 @@
 		AA9DA94322AD8A2100617E46 /* Todo */ = {
 			isa = PBXGroup;
 			children = (
+				AA2606122318D3E500B46F56 /* Styles */,
 				AA94FB9122F4D0E8008D0272 /* Views */,
 				AA9DA97622ADA74C00617E46 /* Containers */,
 				AA9DA96022AD8B2A00617E46 /* State */,
@@ -238,6 +245,7 @@
 		AA9DA97622ADA74C00617E46 /* Containers */ = {
 			isa = PBXGroup;
 			children = (
+				AA427ACB22C143AE005A4368 /* MainSceneView.swift */,
 				AA116DD022D25AB50046D5A3 /* TodoListDetails */,
 				AA116DCC22D257850046D5A3 /* TodoLists */,
 			);
@@ -556,7 +564,7 @@
 			repositoryURL = "https://github.com/StevenLambion/SwiftDux.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.10.0;
+				minimumVersion = 0.11.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

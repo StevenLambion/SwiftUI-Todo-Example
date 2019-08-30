@@ -3,7 +3,7 @@ import Combine
 import SwiftDux
 
 struct TodoListDetailsContainer : View {
-  
+  @Environment(\.horizontalSizeClass) var sizeClass
   @MappedState private var todoList: TodoList
   @MappedDispatch() private var dispatch
   
@@ -21,7 +21,9 @@ struct TodoListDetailsContainer : View {
     )
     .environment(\.editMode, $editMode)
     .onDisappear {
-      self.dispatch(MainSceneAction.selectList(byId: nil))
+      if self.sizeClass == .compact {
+        self.dispatch(MainSceneAction.selectList(byId: nil))
+      }
     }
   }
   

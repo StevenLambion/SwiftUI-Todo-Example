@@ -14,9 +14,4 @@ struct MainScene: StateType {
   private enum CodingKeys: String, CodingKey {
     case selectedListId
   }
-  
-  init(displayMode: MainSceneDisplayMode = .compact, selectedListId: String? = nil) {
-    self.displayMode = displayMode
-    self.selectedListId = selectedListId
-  }
 }

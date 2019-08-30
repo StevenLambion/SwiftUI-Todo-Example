@@ -1,6 +1,5 @@
 import Foundation
 import SwiftDux
-import SwiftUI
 
 func createTodos() -> [Todo] {
   let count = 1
@@ -25,14 +24,11 @@ fileprivate let defaultTodoList = OrderedState(
 )
 
 struct AppState : StateType {
-  var mainScene: MainScene
-  var todoLists: OrderedState<TodoList>
   
-  init(
-    mainScene: MainScene = MainScene(),
-    todoLists: OrderedState<TodoList> = defaultTodoList
-  ) {
-    self.mainScene = mainScene
-    self.todoLists = todoLists
-  }
+  static let currentSchemaVersion = 1
+  
+  var schemaVersion: Int = currentSchemaVersion
+  var mainScene: MainScene = MainScene()
+  var todoLists: OrderedState<TodoList> = defaultTodoList
+
 }
