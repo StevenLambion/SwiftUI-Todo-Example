@@ -1,16 +1,6 @@
 import Foundation
 import SwiftDux
 
-func createTodos() -> [Todo] {
-  let count = 1
-  var todos = [Todo]()
-  todos.reserveCapacity(count)
-  for i in 0..<count {
-    todos.append(Todo(id: "\(i)", text: "Todo \(i)"))
-  }
-  return todos
-}
-
 fileprivate let defaultTodoList = OrderedState(
   TodoList(
     id: "123",
