@@ -14,12 +14,6 @@ struct TodoListDetailsContainer : View {
       TodoListDetailsNameContainer().connect()
       renderList()
     }
-    .navigationBarTitle(Text(""), displayMode: .inline)
-      .navigationBarItems(
-        //leading: self.renderLeadingNavigationButton(),
-        trailing: AddButton { self.dispatch(TodosAction.addTodo(text: "New Todo")) }
-    )
-    .environment(\.editMode, $editMode)
     .onDisappear {
       if self.sizeClass == .compact {
         self.dispatch(MainSceneAction.selectList(byId: nil))
@@ -29,6 +23,7 @@ struct TodoListDetailsContainer : View {
   
   func renderList() -> some View {
     List {
+      TodoListDetailsNewTodoContainer()
       ForEach(todoList.todos) { todo in
         TodoListDetailsRowContainer().connect(with: todo.id)
       }
