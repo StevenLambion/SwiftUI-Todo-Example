@@ -4,25 +4,13 @@ import SwiftDux
 struct TodoListRowContainer : View {
   
   @MappedState private var props: Props
-  @MappedDispatch() private var dispatch
   
   var name: String {
     props.name.isEmpty ? "Untitled todo list" : props.name
   }
   
-  var selected: Binding<Bool> {
-    Binding<Bool>(
-      get: { self.props.selected },
-      set: {
-        if $0 {
-          self.dispatch(MainSceneAction.selectList(byId: self.props.id))
-        }
-      }
-    )
-  }
-  
   var body: some View {
-    NavigationLink(destination: renderTodoListDetails(), isActive: selected) {
+    NavigationLink(destination: renderTodoListDetails(), isActive: props.selected) {
       TodoListRowContentsContainer().connect()
     }
   }
@@ -44,19 +32,21 @@ extension TodoListRowContainer : ParameterizedConnectable {
   struct Props {
     var id: String
     var name: String
-    var selected: Bool
+    var selected: Binding<Bool>
   }
   
   func updateWhen(action: Action, with parameter: String) -> Bool {
     action is MainSceneAction
   }
   
-  func map(state: TodoListsContainer.Props, with parameter: String) -> Props? {
+  func map(state: TodoListsContainer.Props, with parameter: String, binder: StateBinder) -> Props? {
     guard let todoList = state.todoLists[parameter] else { return nil }
     return Props(
       id: parameter,
       name: todoList.name,
-      selected: state.selectedListId == parameter
+      selected: binder.bind(state.selectedListId == parameter) {
+        $0 ? MainSceneAction.selectList(byId: parameter) : nil
+      }
     )
   }
   

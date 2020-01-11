@@ -4,33 +4,27 @@ import Combine
 
 struct TodoListDetailsRowContainer : View {
   
-  @MappedState private var todo: Todo
-  @MappedDispatch() private var dispatch
-  
-  private var text: Binding<String> {
-    Binding<String>(
-      get: { self.todo.text },
-      set: { self.dispatch(TodosAction.setText(forId: self.todo.id, text: $0)) }
-    )
-  }
-  
-  private var completed: Binding<Bool> {
-    Binding<Bool>(
-      get: { self.todo.completed },
-      set: { self.dispatch(TodosAction.setCompleted(forId: self.todo.id, completed: $0)) }
-    )
-  }
+  @MappedState private var props: Props
   
   var body: some View {
-    TodoListDetailsRow(completed: completed, text: text)
+    TodoListDetailsRow(completed: props.completed, text: props.text)
   }
   
 }
 
 extension TodoListDetailsRowContainer : ParameterizedConnectable {
   
-  func map(state: TodoList, with parameter: String) -> Todo? {
-    state.todos[parameter]
+  struct Props {
+    var text: Binding<String>
+    var completed: Binding<Bool>
+  }
+  
+  func map(state: TodoList, with parameter: String, binder: StateBinder) -> Props? {
+    guard let todo = state.todos[parameter] else { return nil }
+    return Props(
+      text: binder.bind(todo.text) { TodosAction.setText(forId: todo.id, text: $0) },
+      completed: binder.bind(todo.completed) { TodosAction.setCompleted(forId: todo.id, completed: $0) }
+    )
   }
   
 }

@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A9B53B6D23CA5BA400A21161 /* SwiftDux in Frameworks */ = {isa = PBXBuildFile; productRef = A9B53B6C23CA5BA400A21161 /* SwiftDux */; };
 		AA1F190B22F14DE5009883F0 /* TodoListDetailsNameContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1F190A22F14DE5009883F0 /* TodoListDetailsNameContainer.swift */; };
-		AA252D0522F5EA6100135FCB /* SwiftDux in Frameworks */ = {isa = PBXBuildFile; productRef = AA252D0422F5EA6100135FCB /* SwiftDux */; };
 		AA252D0722F5F4E300135FCB /* TodoListRowContentsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA252D0622F5F4E300135FCB /* TodoListRowContentsContainer.swift */; };
 		AA2F1A81231782D3003B088A /* CheckedToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2F1A80231782D3003B088A /* CheckedToggleStyle.swift */; };
-		AA336C4E2302022700D99373 /* SwiftDux in Frameworks */ = {isa = PBXBuildFile; productRef = AA336C4D2302022700D99373 /* SwiftDux */; };
 		AA427ACA22C02E75005A4368 /* TodosReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA427AC922C02E75005A4368 /* TodosReducer.swift */; };
 		AA427ACC22C143AE005A4368 /* MainSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA427ACB22C143AE005A4368 /* MainSceneView.swift */; };
 		AA427B0522C31B98005A4368 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA427B0422C31B98005A4368 /* MainScene.swift */; };
@@ -42,6 +41,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A9B53B6723CA4E5300A21161 /* SwiftDux.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftDux.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9B53B6923CA4E5300A21161 /* SwiftDuxExtras.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftDuxExtras.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA1F190A22F14DE5009883F0 /* TodoListDetailsNameContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListDetailsNameContainer.swift; sourceTree = "<group>"; };
 		AA252D0622F5F4E300135FCB /* TodoListRowContentsContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListRowContentsContainer.swift; sourceTree = "<group>"; };
 		AA2F1A80231782D3003B088A /* CheckedToggleStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckedToggleStyle.swift; sourceTree = "<group>"; };
@@ -81,8 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA336C4E2302022700D99373 /* SwiftDux in Frameworks */,
-				AA252D0522F5EA6100135FCB /* SwiftDux in Frameworks */,
+				A9B53B6D23CA5BA400A21161 /* SwiftDux in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,6 +230,8 @@
 		AA9DA95D22AD8ACF00617E46 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A9B53B6723CA4E5300A21161 /* SwiftDux.framework */,
+				A9B53B6923CA4E5300A21161 /* SwiftDuxExtras.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -273,8 +275,7 @@
 			);
 			name = Todo;
 			packageProductDependencies = (
-				AA252D0422F5EA6100135FCB /* SwiftDux */,
-				AA336C4D2302022700D99373 /* SwiftDux */,
+				A9B53B6C23CA5BA400A21161 /* SwiftDux */,
 			);
 			productName = Todo;
 			productReference = AA9DA94122AD8A2100617E46 /* Todo.app */;
@@ -305,7 +306,7 @@
 			);
 			mainGroup = AA9DA93822AD8A2100617E46;
 			packageReferences = (
-				AA336C4C2302022700D99373 /* XCRemoteSwiftPackageReference "SwiftDux" */,
+				A9B53B6B23CA5BA400A21161 /* XCRemoteSwiftPackageReference "SwiftDux" */,
 			);
 			productRefGroup = AA9DA94222AD8A2100617E46 /* Products */;
 			projectDirPath = "";
@@ -563,24 +564,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		AA336C4C2302022700D99373 /* XCRemoteSwiftPackageReference "SwiftDux" */ = {
+		A9B53B6B23CA5BA400A21161 /* XCRemoteSwiftPackageReference "SwiftDux" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/StevenLambion/SwiftDux.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.11.0;
+				minimumVersion = 0.12.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		AA252D0422F5EA6100135FCB /* SwiftDux */ = {
+		A9B53B6C23CA5BA400A21161 /* SwiftDux */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = SwiftDux;
-		};
-		AA336C4D2302022700D99373 /* SwiftDux */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AA336C4C2302022700D99373 /* XCRemoteSwiftPackageReference "SwiftDux" */;
+			package = A9B53B6B23CA5BA400A21161 /* XCRemoteSwiftPackageReference "SwiftDux" */;
 			productName = SwiftDux;
 		};
 		AA9DA95B22AD8ABF00617E46 /* SwiftDux */ = {
