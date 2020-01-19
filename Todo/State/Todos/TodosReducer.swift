@@ -2,47 +2,27 @@
 import Foundation
 import SwiftDux
 
-enum TodosAction: Action {
-  case setText(forId: String, text: String)
-  case setCompleted(forId: String, completed: Bool)
-  case addTodo(text: String)
-  case removeTodos(at: IndexSet)
-  case moveTodos(from: IndexSet, to: Int)
-}
-
 final class TodosReducer: Reducer {
   
-  func reduce(state: TodoList, action: TodosAction) -> TodoList {
+  func reduce(state: [String:Todo], action: TodosAction) -> [String:Todo] {
     var state = state
     switch action {
+    case .addTodo(let id, let text):
+      state[id] = Todo(id: id, text: text)
     case .setText(let id, let text):
-      if var todo = state.todos[id] {
-        todo.text = text
-        state.todos[id] = todo
-      }
+      state[id] = updateTodo(todo: state[id]) { $0.text = text }
     case .setCompleted(let id, let completed):
-      state.todos = reduceCompleted(state: state.todos, forId: id, completed: completed)
-    case .addTodo(let text):
-      let id = UUID().uuidString
-      state.todos.prepend(Todo(id: id, text: text))
-    case .removeTodos(let indexSet):
-      state.todos.remove(at: indexSet)
-    case .moveTodos(let indexSet, let index):
-      state.todos.move(from: indexSet, to: index)
+      state[id] = updateTodo(todo: state[id]) { $0.completed = completed }
+    case .removeTodos(let ids):
+      ids.forEach { state.removeValue(forKey: $0) }
     }
     return state
   }
   
-  func reduceCompleted(state: OrderedState<Todo>, forId id: String, completed: Bool) -> OrderedState<Todo> {
-    var state = state
-    guard var todo = state[id], todo.completed != completed else { return state }
-    guard let index = state.firstIndex(of: todo) else { return state }
-    let lastNonCompletedIndex: Int = state.lastIndex(where: { $0.completed == false }) ?? -1
-    let newIndex = lastNonCompletedIndex > -1 ? lastNonCompletedIndex + 1 : (completed ? state.count : 0)
-    todo.completed = completed
-    state[id] = todo
-    state.move(from: IndexSet([index]), to: newIndex)
-    return state
+  func updateTodo(todo: Todo?, perform: (inout Todo) ->()) -> Todo? {
+    guard var todo = todo else { return nil }
+    perform(&todo)
+    return todo
   }
   
 }

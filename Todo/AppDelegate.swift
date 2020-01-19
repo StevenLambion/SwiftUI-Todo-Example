@@ -17,7 +17,7 @@ import SwiftDuxExtras
     state: AppState(),
     reducer: AppReducer(),
     middleware: [
-      PrintActionMiddleware(),
+      // PrintActionMiddleware(),
       PersistStateMiddleware(JSONStatePersistor<AppState>()) { state in
         state.schemaVersion == AppState.currentSchemaVersion
       }

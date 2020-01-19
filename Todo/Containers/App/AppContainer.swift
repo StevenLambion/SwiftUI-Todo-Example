@@ -1,13 +1,14 @@
 import SwiftUI
 import SwiftDux
 
-struct MainSceneView : View {
+struct AppContainer : View {
+  var store: Store<AppState>
   
   var body: some View {
     NavigationView {
-      TodoListsContainer().connect()
+      TodoListBrowserContainer().connect()
       AnyView(Text("Select a todo list."))
-    }
+    }.provideStore(store)
   }
   
 }

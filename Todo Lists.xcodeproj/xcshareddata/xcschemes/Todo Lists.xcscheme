@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AA9DA94022AD8A2100617E46"
-               BuildableName = "Todo.app"
-               BlueprintName = "Todo"
-               ReferencedContainer = "container:Todo.xcodeproj">
+               BuildableName = "Todo Lists.app"
+               BlueprintName = "Todo Lists"
+               ReferencedContainer = "container:Todo Lists.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AA9DA94022AD8A2100617E46"
-            BuildableName = "Todo.app"
-            BlueprintName = "Todo"
-            ReferencedContainer = "container:Todo.xcodeproj">
+            BuildableName = "Todo Lists.app"
+            BlueprintName = "Todo Lists"
+            ReferencedContainer = "container:Todo Lists.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AA9DA94022AD8A2100617E46"
-            BuildableName = "Todo.app"
-            BlueprintName = "Todo"
-            ReferencedContainer = "container:Todo.xcodeproj">
+            BuildableName = "Todo Lists.app"
+            BlueprintName = "Todo Lists"
+            ReferencedContainer = "container:Todo Lists.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct TodoListDetailsNameField : View {
+struct TodoListNameField : View {
   @Binding var name: String
   
   var body: some View {

@@ -2,11 +2,14 @@ import Foundation
 import SwiftDux
 
 enum TodoListsAction: Action {
-  case setTodoListName(forId: String, name: String)
-  case createTodoList(name: String, id: String)
+  case addTodoList(id: String, name: String)
   case removeTodoLists(at: IndexSet)
   case moveTodoLists(from: IndexSet, to: Int)
-  case routeTodosAction(listId: String, action: TodosAction)
+  case setName(id: String, name: String)
+  case setNewTodoText(id: String, text: String)
+  case addTodoId(id: String, todoId: String)
+  case moveTodos(id: String, from: IndexSet, to: Int)
+  case removeTodoIds(id: String, at: IndexSet)
 }
 
 extension TodoListsAction {
@@ -14,8 +17,41 @@ extension TodoListsAction {
   static func addNewTodoList() -> ActionPlan<AppState> {
     ActionPlan { store in
       let id = UUID().uuidString
-      store.send(TodoListsAction.createTodoList(name: "", id: id))
-      store.send(MainSceneAction.selectList(byId: id))
+      store.send(TodoListsAction.addTodoList(id: id, name: ""))
+      store.send(AppAction.selectTodoList(id: id))
+    }
+  }
+  
+  static func addTodo(id: String, text: String) -> ActionPlan<AppState> {
+    ActionPlan { store in
+      let todoId = UUID().uuidString
+      store.send(TodosAction.addTodo(id: todoId, text: text))
+      store.send(TodoListsAction.addTodoId(id: id, todoId: todoId))
+    }
+  }
+  
+  static func removeTodos(id: String, at indexSet: IndexSet) -> ActionPlan<AppState> {
+    ActionPlan { store in
+      let todoIds: [String] = store.state.todoLists[id]?.todoIds ?? []
+      store.send(TodosAction.removeTodos(ids: indexSet.map { todoIds[$0] }))
+      store.send(TodoListsAction.removeTodoIds(id: id, at: indexSet))
+    }
+  }
+   
+  static func toggleTodoCompeletion(todoListId: String, todoId: String, completed: Bool) -> ActionPlan<AppState> {
+    ActionPlan { store in
+      let todoLists = store.state.todoLists
+      let todos = store.state.todos
+      guard
+        let todoList = todoLists[todoListId],
+        let todo = todos[todoId],
+        let index = todoList.todoIds.firstIndex(of: todo.id)
+      else { return }
+      let lastNonCompletedIndex: Int = todoList.todoIds.lastIndex(where: { todos[$0]?.completed == false }) ?? -1
+      let newIndex = lastNonCompletedIndex > -1 ? lastNonCompletedIndex + 1 : (completed ? todoList.todoIds.count : 0)
+      
+      store.send(TodosAction.setCompleted(id: todoId, completed: completed))
+      store.send(TodoListsAction.moveTodos(id: todoListId, from: IndexSet([index]), to: newIndex))
     }
   }
   

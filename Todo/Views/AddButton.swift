@@ -1,12 +1,22 @@
 import SwiftUI
 
-struct AddButton : View {
+public struct AddButton : View {
   
-  var onAdd: ()->()
+  public var onAdd: ()->()
   
-  var body: some View {
+  public var body: some View {
     Button(action: onAdd) {
       Image(systemName: "plus").imageScale(.large).padding()
     }
   }
 }
+
+#if DEBUG
+public enum AddButton_Previews: PreviewProvider {
+  
+  public static var previews: some View {
+    AddButton() {  }
+  }
+  
+}
+#endif

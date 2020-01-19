@@ -8,8 +8,6 @@ final class MainSceneReducer: Reducer {
     switch action {
     case .setDisplayMode(let mode):
       state.displayMode = mode
-    case .selectList(let id):
-      state.selectedListId = id
     }
     return state
   }
