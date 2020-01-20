@@ -24,5 +24,4 @@ final class TodosReducer: Reducer {
     perform(&todo)
     return todo
   }
-  
 }

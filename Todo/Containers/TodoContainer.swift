@@ -3,7 +3,6 @@ import SwiftDux
 import Combine
 
 struct TodoContainer : View {
-  
   @MappedState private var props: Props
   
   var body: some View {
@@ -22,9 +21,7 @@ extension TodoContainer : ParameterizedConnectable {
   typealias Parameter = (listId: String, todoId: String)
   
   func map(state: AppState, with parameter: Parameter, binder: StateBinder) -> Props? {
-    guard
-      let todo = state.todos[parameter.todoId]
-    else { return nil }
+    guard let todo = state.todos[parameter.todoId] else { return nil }
       return Props(
         text: binder.bind(todo.text) { TodosAction.setText(id: todo.id, text: $0) },
         completed: binder.bind(todo.completed) {
@@ -36,7 +33,6 @@ extension TodoContainer : ParameterizedConnectable {
         }
     )
   }
-  
 }
 
 #if DEBUG
@@ -53,6 +49,5 @@ public enum TodoListDetailsRowContainer_Previews: PreviewProvider {
       .connect(with: (listId: "123", todoId: "2"))
     .provideStore(store)
   }
-  
 }
 #endif

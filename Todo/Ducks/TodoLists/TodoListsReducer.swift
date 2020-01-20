@@ -31,5 +31,4 @@ final class TodoListsReducer: Reducer {
     perform(&todoList)
     return todoList
   }
-  
 }

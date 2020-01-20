@@ -24,6 +24,5 @@ public enum TodoListNameField_Previews: PreviewProvider {
   public static var previews: some View {
     PreviewWrapper()
   }
-  
 }
 #endif

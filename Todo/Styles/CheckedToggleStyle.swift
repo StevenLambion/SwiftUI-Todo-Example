@@ -11,7 +11,6 @@ struct CheckedToggleStyle : ToggleStyle {
         .foregroundColor(color)
     }
   }
-  
 }
 
 #if DEBUG
@@ -29,6 +28,5 @@ public enum CheckedToggleStyle_Previews: PreviewProvider {
   public static var previews: some View {
     PreviewWrapper()
   }
-  
 }
 #endif

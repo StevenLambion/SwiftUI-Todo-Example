@@ -16,6 +16,5 @@ public enum AddButton_Previews: PreviewProvider {
   public static var previews: some View {
     AddButton() {  }
   }
-  
 }
 #endif

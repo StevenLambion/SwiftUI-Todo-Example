@@ -31,6 +31,5 @@ public enum TodoRow_Previews: PreviewProvider {
   public static var previews: some View {
     StateWrapper()
   }
-  
 }
 #endif

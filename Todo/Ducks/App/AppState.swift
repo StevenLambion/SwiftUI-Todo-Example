@@ -23,5 +23,4 @@ struct AppState : StateType {
   var todoLists: OrderedState<TodoList> = defaultTodoList
   var todos: [String:Todo] = defaultTodos
   var selectedTodoListId: String? = nil
-
 }

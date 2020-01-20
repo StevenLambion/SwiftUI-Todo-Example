@@ -33,6 +33,5 @@ public enum NewTodoRow_Previews: PreviewProvider {
   public static var previews: some View {
     PreviewWrapper()
   }
-  
 }
 #endif

@@ -22,7 +22,7 @@ struct TodoListContainer : View {
       ForEach(props.todos) { todo in
         TodoContainer().connect(with: (listId: self.props.id, todoId: todo.id))
       }
-      .onMove(perform: moveTodoList)
+      .onMove(perform: moveTodoLists)
       .onDelete(perform: removeTodoLists)
     }
   }
@@ -31,7 +31,7 @@ struct TodoListContainer : View {
     dispatch(TodoListsAction.addTodo(id: props.id, text: text))
   }
   
-  func moveTodoList(from indexSet: IndexSet, to index: Int) {
+  func moveTodoLists(from indexSet: IndexSet, to index: Int) {
     dispatch(TodoListsAction.moveTodos(id: props.id, from: indexSet, to: index))
   }
   
@@ -73,7 +73,6 @@ extension TodoListContainer : ParameterizedConnectable {
       todos: todoList.todoIds.map { state.todos[$0]! }
     )
   }
-  
 }
 
 #if DEBUG
@@ -90,6 +89,5 @@ public enum TodoListContainer_Previews: PreviewProvider {
       .connect(with: "123")
     .provideStore(store)
   }
-  
 }
 #endif

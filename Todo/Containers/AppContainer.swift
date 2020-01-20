@@ -10,7 +10,6 @@ struct AppContainer : View {
       AnyView(Text("Select a todo list."))
     }.provideStore(store)
   }
-  
 }
 
 #if DEBUG
@@ -25,6 +24,5 @@ public enum AppContainer_Previews: PreviewProvider {
   public static var previews: some View {
     AppContainer(store: store)
   }
-  
 }
 #endif

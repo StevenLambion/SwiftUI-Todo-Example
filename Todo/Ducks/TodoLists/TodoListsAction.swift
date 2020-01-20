@@ -54,5 +54,4 @@ extension TodoListsAction {
       store.send(TodoListsAction.moveTodos(id: id, from: IndexSet([index]), to: newIndex))
     }
   }
-  
 }

@@ -101,57 +101,6 @@
 			path = TodoLists;
 			sourceTree = "<group>";
 		};
-		A976F55023D3DC2D00004B33 /* App */ = {
-			isa = PBXGroup;
-			children = (
-				AA427ACB22C143AE005A4368 /* AppContainer.swift */,
-			);
-			path = App;
-			sourceTree = "<group>";
-		};
-		A976F55123D3E73000004B33 /* Todo */ = {
-			isa = PBXGroup;
-			children = (
-				A976F55223D3E74800004B33 /* Views */,
-				AA9DA96822AD8E4C00617E46 /* TodoContainer.swift */,
-			);
-			path = Todo;
-			sourceTree = "<group>";
-		};
-		A976F55223D3E74800004B33 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				AA94FB9422F4D7F8008D0272 /* TodoRow.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		AA116DCC22D257850046D5A3 /* TodoListBrowser */ = {
-			isa = PBXGroup;
-			children = (
-				AA116DCD22D257930046D5A3 /* Views */,
-				AA9DA96C22AD8FC600617E46 /* TodoListBrowserContainer.swift */,
-			);
-			path = TodoListBrowser;
-			sourceTree = "<group>";
-		};
-		AA116DCD22D257930046D5A3 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				AA94FB9222F4D188008D0272 /* TodoListRow.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		AA116DD022D25AB50046D5A3 /* TodoList */ = {
-			isa = PBXGroup;
-			children = (
-				AA94FB9622F4D7FF008D0272 /* Views */,
-				AA9DA94822AD8A2100617E46 /* TodoListContainer.swift */,
-			);
-			path = TodoList;
-			sourceTree = "<group>";
-		};
 		AA2606122318D3E500B46F56 /* Styles */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,15 +133,10 @@
 			isa = PBXGroup;
 			children = (
 				AA94FB9B22F4D969008D0272 /* AddButton.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		AA94FB9622F4D7FF008D0272 /* Views */ = {
-			isa = PBXGroup;
-			children = (
+				AA94FB9222F4D188008D0272 /* TodoListRow.swift */,
 				AA94FB9722F4D869008D0272 /* TodoListNameField.swift */,
 				AA696F8C2321ED7300BFCC0B /* NewTodoRow.swift */,
+				AA94FB9422F4D7F8008D0272 /* TodoRow.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -221,7 +165,7 @@
 				AA2606122318D3E500B46F56 /* Styles */,
 				AA94FB9122F4D0E8008D0272 /* Views */,
 				AA9DA97622ADA74C00617E46 /* Containers */,
-				AA9DA96022AD8B2A00617E46 /* State */,
+				AA9DA96022AD8B2A00617E46 /* Ducks */,
 				AA9DA94422AD8A2100617E46 /* AppDelegate.swift */,
 				AA9DA94622AD8A2100617E46 /* SceneDelegate.swift */,
 				AA9DA94A22AD8A2200617E46 /* Assets.xcassets */,
@@ -249,23 +193,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		AA9DA96022AD8B2A00617E46 /* State */ = {
+		AA9DA96022AD8B2A00617E46 /* Ducks */ = {
 			isa = PBXGroup;
 			children = (
 				AA427B0022C31B28005A4368 /* App */,
 				A976F54723D3D65E00004B33 /* TodoLists */,
 				AA427B0122C31B35005A4368 /* Todos */,
 			);
-			path = State;
+			path = Ducks;
 			sourceTree = "<group>";
 		};
 		AA9DA97622ADA74C00617E46 /* Containers */ = {
 			isa = PBXGroup;
 			children = (
-				A976F55023D3DC2D00004B33 /* App */,
-				AA116DCC22D257850046D5A3 /* TodoListBrowser */,
-				AA116DD022D25AB50046D5A3 /* TodoList */,
-				A976F55123D3E73000004B33 /* Todo */,
+				AA427ACB22C143AE005A4368 /* AppContainer.swift */,
+				AA9DA96C22AD8FC600617E46 /* TodoListBrowserContainer.swift */,
+				AA9DA94822AD8A2100617E46 /* TodoListContainer.swift */,
+				AA9DA96822AD8E4C00617E46 /* TodoContainer.swift */,
 			);
 			path = Containers;
 			sourceTree = "<group>";

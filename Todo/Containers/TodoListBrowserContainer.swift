@@ -93,6 +93,5 @@ public enum TodoListBrowserContainer_Previews: PreviewProvider {
         .provideStore(store)
     }
   }
-  
 }
 #endif

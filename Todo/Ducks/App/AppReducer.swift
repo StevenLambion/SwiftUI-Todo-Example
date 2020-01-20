@@ -22,5 +22,4 @@ final class AppReducer : Reducer {
       selectedTodoListId: state.selectedTodoListId
     )
   }
-  
 }

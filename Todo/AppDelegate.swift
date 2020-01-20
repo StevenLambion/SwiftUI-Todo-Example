@@ -11,7 +11,7 @@ import SwiftDux
 import SwiftDuxExtras
 
 @UIApplicationMain
-	class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var store = Store(
     state: AppState(),
@@ -46,7 +46,5 @@ import SwiftDuxExtras
     // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
     // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
   }
-
-
 }
 
