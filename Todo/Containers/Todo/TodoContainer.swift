@@ -29,7 +29,7 @@ extension TodoContainer : ParameterizedConnectable {
         text: binder.bind(todo.text) { TodosAction.setText(id: todo.id, text: $0) },
         completed: binder.bind(todo.completed) {
           TodoListsAction.toggleTodoCompeletion(
-            todoListId: parameter.listId,
+            id: parameter.listId,
             todoId: todo.id,
             completed: $0
           )

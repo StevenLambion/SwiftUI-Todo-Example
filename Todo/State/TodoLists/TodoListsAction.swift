@@ -38,12 +38,12 @@ extension TodoListsAction {
     }
   }
    
-  static func toggleTodoCompeletion(todoListId: String, todoId: String, completed: Bool) -> ActionPlan<AppState> {
+  static func toggleTodoCompeletion(id: String, todoId: String, completed: Bool) -> ActionPlan<AppState> {
     ActionPlan { store in
       let todoLists = store.state.todoLists
       let todos = store.state.todos
       guard
-        let todoList = todoLists[todoListId],
+        let todoList = todoLists[id],
         let todo = todos[todoId],
         let index = todoList.todoIds.firstIndex(of: todo.id)
       else { return }
@@ -51,7 +51,7 @@ extension TodoListsAction {
       let newIndex = lastNonCompletedIndex > -1 ? lastNonCompletedIndex + 1 : (completed ? todoList.todoIds.count : 0)
       
       store.send(TodosAction.setCompleted(id: todoId, completed: completed))
-      store.send(TodoListsAction.moveTodos(id: todoListId, from: IndexSet([index]), to: newIndex))
+      store.send(TodoListsAction.moveTodos(id: id, from: IndexSet([index]), to: newIndex))
     }
   }
   

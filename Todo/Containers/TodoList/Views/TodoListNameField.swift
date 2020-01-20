@@ -9,3 +9,21 @@ struct TodoListNameField : View {
     .padding()
   }
 }
+
+#if DEBUG
+public enum TodoListNameField_Previews: PreviewProvider {
+  
+  struct PreviewWrapper: View {
+    @State private var name = "Todo List"
+    
+    var body: some View {
+      TodoListNameField(name: $name)
+    }
+  }
+  
+  public static var previews: some View {
+    PreviewWrapper()
+  }
+  
+}
+#endif

@@ -1,7 +1,6 @@
 import SwiftUI
 
 public struct AddButton : View {
-  
   public var onAdd: ()->()
   
   public var body: some View {

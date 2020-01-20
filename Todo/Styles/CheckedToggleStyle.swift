@@ -13,3 +13,22 @@ struct CheckedToggleStyle : ToggleStyle {
   }
   
 }
+
+#if DEBUG
+public enum CheckedToggleStyle_Previews: PreviewProvider {
+  
+  struct PreviewWrapper: View {
+    @State private var isOn: Bool = false
+    
+    var body: some View {
+      Toggle(isOn: $isOn) { EmptyView() }
+      .toggleStyle(CheckedToggleStyle())
+    }
+  }
+  
+  public static var previews: some View {
+    PreviewWrapper()
+  }
+  
+}
+#endif
