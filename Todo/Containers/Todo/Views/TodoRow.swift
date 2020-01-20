@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct TodoListDetailsRow : View {
+struct TodoRow : View {
   @Binding var completed: Bool
   @Binding var text: String
   
@@ -14,14 +14,14 @@ struct TodoListDetailsRow : View {
 }
 
 #if DEBUG
-public enum TodoListDetailsRow_Previews: PreviewProvider {
+public enum TodoRow_Previews: PreviewProvider {
   
   struct StateWrapper: View {
     @State var completed: Bool = false
     @State var text: String = "A Todo"
     
     var body: some View {
-      TodoListDetailsRow(
+      TodoRow(
         completed: $completed,
         text: $text
       )

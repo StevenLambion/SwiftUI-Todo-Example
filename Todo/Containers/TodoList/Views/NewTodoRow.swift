@@ -1,10 +1,8 @@
 import SwiftUI
 import SwiftDux
 
-struct TodoListDetailsNewTodoContainer : View {
-  
+struct NewTodoRow : View {
   @Binding var text: String
-  
   var onAddTodo: (String) -> ()
   
   var body: some View {

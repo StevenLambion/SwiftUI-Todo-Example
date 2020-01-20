@@ -7,7 +7,7 @@ struct TodoContainer : View {
   @MappedState private var props: Props
   
   var body: some View {
-    TodoListDetailsRow(completed: props.completed, text: props.text)
+    TodoRow(completed: props.completed, text: props.text)
   }
   
 }
@@ -19,10 +19,7 @@ extension TodoContainer : ParameterizedConnectable {
     var completed: Binding<Bool>
   }
   
-  struct Parameter {
-    var listId: String
-    var todoId: String
-  }
+  typealias Parameter = (listId: String, todoId: String)
   
   func map(state: AppState, with parameter: Parameter, binder: StateBinder) -> Props? {
     guard
@@ -53,7 +50,7 @@ public enum TodoListDetailsRowContainer_Previews: PreviewProvider {
   
   public static var previews: some View {
     TodoContainer()
-      .connect(with: .init(listId: "123", todoId: "2"))
+      .connect(with: (listId: "123", todoId: "2"))
     .provideStore(store)
   }
   

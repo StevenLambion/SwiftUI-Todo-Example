@@ -20,7 +20,6 @@ struct AppState : StateType {
   static let currentSchemaVersion = 2
   
   var schemaVersion: Int = currentSchemaVersion
-  var mainScene: MainScene = MainScene()
   var todoLists: OrderedState<TodoList> = defaultTodoList
   var todos: [String:Todo] = defaultTodos
   var selectedTodoListId: String? = nil

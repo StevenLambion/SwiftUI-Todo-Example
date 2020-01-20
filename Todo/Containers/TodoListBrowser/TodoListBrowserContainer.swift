@@ -9,22 +9,33 @@ struct TodoListBrowserContainer : View {
   @MappedDispatch() private var dispatch
   
   var body: some View {
-    renderList()
+    List {
+      ForEach(props.todoLists, content: renderRow)
+        .onMove(perform: moveTodoList)
+        .onDelete(perform: removeTodoLists)
+    }
     .navigationBarTitle(Text("Todo Lists"))
     .navigationBarItems(
       leading: EditButton(),
       trailing: AddButton { self.dispatch(TodoListsAction.addNewTodoList()) }
     )
+    .onAppear(perform: selectDefaultTodoList)
   }
   
-  func renderList() -> some View {
-    List {
-      ForEach(props.todoLists) { list in
-        RowContainer(onSelectRow: self.selectTodoList).connect(with: list.id)
-      }
-      .onMove(perform: moveTodoList)
-      .onDelete(perform: removeTodoLists)
-    }.onAppear(perform: selectDefaultTodoList)
+  func renderRow(todoList: TodoList) -> some View {
+    TodoListRow(
+      todoList: todoList,
+      selected: Binding(
+        get: { self.props.selectedTodoListId == todoList.id },
+        set: { if $0 == true { self.selectTodoList(id: todoList.id) } }
+      ),
+      destination: self.renderTodoList
+    )
+  }
+  
+  func renderTodoList(id: String) -> some View {
+    TodoListContainer()
+      .connect(with: id)
   }
   
   func addNewTodoList() {
@@ -53,14 +64,14 @@ struct TodoListBrowserContainer : View {
 extension TodoListBrowserContainer : Connectable {
   
   struct Props {
-    var selectedTodoListId: String?
     var todoLists: OrderedState<TodoList>
+    var selectedTodoListId: String?
   }
   
   func map(state: AppState) -> Props? {
     Props(
-      selectedTodoListId: state.selectedTodoListId,
-      todoLists: state.todoLists
+      todoLists: state.todoLists,
+      selectedTodoListId: state.selectedTodoListId
     )
   }
   

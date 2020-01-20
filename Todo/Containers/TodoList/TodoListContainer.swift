@@ -18,9 +18,9 @@ struct TodoListContainer : View {
   
   func renderList() -> some View {
     List {
-      TodoListDetailsNewTodoContainer(text: props.newTodoText, onAddTodo: addNewTodo)
+      NewTodoRow(text: props.newTodoText, onAddTodo: addNewTodo)
       ForEach(props.todos) { todo in
-        TodoContainer().connect(with: .init(listId: self.props.id, todoId: todo.id))
+        TodoContainer().connect(with: (listId: self.props.id, todoId: todo.id))
       }
       .onMove(perform: moveTodoList)
       .onDelete(perform: removeTodoLists)
