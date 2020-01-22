@@ -34,8 +34,7 @@ struct TodoListBrowserContainer : View {
   }
   
   func renderTodoList(id: String) -> some View {
-    TodoListContainer()
-      .connect(with: id)
+    TodoListContainer().connect(with: id)
   }
   
   func addNewTodoList() {
@@ -63,7 +62,7 @@ struct TodoListBrowserContainer : View {
 
 extension TodoListBrowserContainer : Connectable {
   
-  struct Props {
+  struct Props: Equatable {
     var todoLists: OrderedState<TodoList>
     var selectedTodoListId: String?
   }

@@ -8,7 +8,7 @@ struct TodoRow : View {
     HStack {
       Toggle(isOn: $completed) { EmptyView() }
         .toggleStyle(CheckedToggleStyle())
-      TextField("", text: $text)
+      TextField("Empty", text: $text)
     }
   }
 }

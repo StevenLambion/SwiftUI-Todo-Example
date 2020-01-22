@@ -10,7 +10,7 @@ struct TodoListContainer : View {
   
   var body: some View {
     VStack {
-      TodoListNameField(name: props.name)
+      TodoListNameContainer().connect(with: props.id)
       renderList()
     }
     .onDisappear(perform: deselectTodoList)
@@ -18,9 +18,9 @@ struct TodoListContainer : View {
   
   func renderList() -> some View {
     List {
-      NewTodoRow(text: props.newTodoText, onAddTodo: addNewTodo)
-      ForEach(props.todos) { todo in
-        TodoContainer().connect(with: (listId: self.props.id, todoId: todo.id))
+      NewTodoContainer().connect(with: self.props.id)
+      ForEach(props.todoIds, id: \.self) { id in
+        TodoContainer().connect(with: (listId: self.props.id, todoId: id))
       }
       .onMove(perform: moveTodoLists)
       .onDelete(perform: removeTodoLists)
@@ -44,33 +44,20 @@ struct TodoListContainer : View {
       self.dispatch(AppAction.selectTodoList(id: nil))
     }
   }
-
 }
   
 extension TodoListContainer : ParameterizedConnectable {
   
-  struct Props {
+  struct Props: Equatable {
     var id: String
-    var name: Binding<String>
-    var newTodoText: Binding<String>
-    var todos: [Todo]
+    var todoIds: [String]
   }
   
-  func updateWhen(action: Action, with parameter: String) -> Bool {
-    action is TodoListsAction
-  }
-  
-  func map(state: AppState, with parameter: String, binder: StateBinder) -> Props? {
+  func map(state: AppState, with parameter: String) -> Props? {
     guard let todoList = state.todoLists[parameter] else { return nil }
     return Props(
       id: todoList.id,
-      name: binder.bind(todoList.name) {
-        TodoListsAction.setName(id: todoList.id, name: $0)
-      },
-      newTodoText: binder.bind(todoList.newTodoText) {
-        TodoListsAction.setNewTodoText(id: todoList.id, text: $0)
-      },
-      todos: todoList.todoIds.map { state.todos[$0]! }
+      todoIds: todoList.todoIds
     )
   }
 }

@@ -6,31 +6,31 @@ struct TodoContainer : View {
   @MappedState private var props: Props
   
   var body: some View {
-    TodoRow(completed: props.completed, text: props.text)
+    TodoRow(completed: props.$completed, text: props.$text)
   }
   
 }
 
 extension TodoContainer : ParameterizedConnectable {
   
-  struct Props {
-    var text: Binding<String>
-    var completed: Binding<Bool>
+  struct Props: Equatable {
+    @Binding var text: String
+    @Binding var completed: Bool
   }
   
   typealias Parameter = (listId: String, todoId: String)
   
   func map(state: AppState, with parameter: Parameter, binder: StateBinder) -> Props? {
     guard let todo = state.todos[parameter.todoId] else { return nil }
-      return Props(
-        text: binder.bind(todo.text) { TodosAction.setText(id: todo.id, text: $0) },
-        completed: binder.bind(todo.completed) {
-          TodoListsAction.toggleTodoCompeletion(
-            id: parameter.listId,
-            todoId: todo.id,
-            completed: $0
-          )
-        }
+    return Props(
+      text: binder.bind(todo.text) { TodosAction.setText(id: todo.id, text: $0) },
+      completed: binder.bind(todo.completed) {
+        TodoListsAction.toggleTodoCompeletion(
+          id: parameter.listId,
+          todoId: todo.id,
+          completed: $0
+        )
+      }
     )
   }
 }
