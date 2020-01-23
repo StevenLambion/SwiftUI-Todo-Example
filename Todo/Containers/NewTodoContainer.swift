@@ -3,9 +3,9 @@ import Combine
 import SwiftDux
 
 struct NewTodoContainer : ConnectableView {
-  @MappedDispatch() private var dispatch
-  
   var id: String
+  
+  @MappedDispatch() private var dispatch
   
   func map(state: AppState, binder: StateBinder) -> Binding<String>? {
     guard let todoList = state.todoLists[id] else { return nil }

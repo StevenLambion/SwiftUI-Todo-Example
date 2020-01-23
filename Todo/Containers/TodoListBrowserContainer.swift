@@ -3,17 +3,19 @@ import SwiftDux
 import Combine
 
 struct TodoListBrowserContainer : ConnectableView {
-  
-//  struct Props: Equatable {
-//    var todoLists: OrderedState<TodoList>
-//    var selectedTodoListId: String?
-//  }
-  
   @Environment(\.horizontalSizeClass) private var sizeClass
   @MappedDispatch() private var dispatch
   
-  func map(state: AppState) -> AppState? {
-    state
+  struct Props: Equatable {
+    var todoLists: OrderedState<TodoList>
+    var selectedTodoListId: String?
+  }
+  
+  func map(state: AppState) -> Props? {
+    Props(
+      todoLists: state.todoLists,
+      selectedTodoListId: state.selectedTodoListId
+    )
   }
   
   func body(props: Props) -> some View {

@@ -3,7 +3,6 @@ import SwiftDux
 import Combine
 
 struct TodoContainer : ConnectableView {
-  
   var todoListId: String
   var todoId: String
   

@@ -3,11 +3,10 @@ import Combine
 import SwiftDux
 
 struct TodoListContainer : ConnectableView {
-  @Environment(\.horizontalSizeClass) var sizeClass
-  @MappedDispatch() private var dispatch
-  @State private var editMode: EditMode = .inactive
+  var id: String
   
-  public var id: String
+  @Environment(\.horizontalSizeClass) private var sizeClass
+  @MappedDispatch() private var dispatch
   
   func map(state: AppState) -> [String]? {
     state.todoLists[id]?.todoIds
