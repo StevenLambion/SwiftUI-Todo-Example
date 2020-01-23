@@ -2,25 +2,30 @@ import SwiftUI
 import Combine
 import SwiftDux
 
-struct TodoListContainer : View {
+struct TodoListContainer : ConnectableView {
   @Environment(\.horizontalSizeClass) var sizeClass
-  @MappedState private var props: Props
   @MappedDispatch() private var dispatch
-  @SwiftUI.State private var editMode: EditMode = .inactive
+  @State private var editMode: EditMode = .inactive
   
-  var body: some View {
+  public var id: String
+  
+  func map(state: AppState) -> [String]? {
+    state.todoLists[id]?.todoIds
+  }
+  
+  func body(props: Props) -> some View {
     VStack {
-      TodoListNameContainer().connect(with: props.id)
-      renderList()
+      TodoListNameContainer(id: id)
+      NewTodoContainer(id: id)
+      renderList(props: props)
     }
     .onDisappear(perform: deselectTodoList)
   }
   
-  func renderList() -> some View {
+  func renderList(props: Props) -> some View {
     List {
-      NewTodoContainer().connect(with: self.props.id)
-      ForEach(props.todoIds, id: \.self) { id in
-        TodoContainer().connect(with: (listId: self.props.id, todoId: id))
+      ForEach(props, id: \.self) { todoId in
+        TodoContainer(todoListId: self.id, todoId: todoId)
       }
       .onMove(perform: moveTodoLists)
       .onDelete(perform: removeTodoLists)
@@ -28,37 +33,21 @@ struct TodoListContainer : View {
   }
   
   func addNewTodo(text: String) {
-    dispatch(TodoListsAction.addTodo(id: props.id, text: text))
+    dispatch(TodoListsAction.addTodo(id: id, text: text))
   }
   
   func moveTodoLists(from indexSet: IndexSet, to index: Int) {
-    dispatch(TodoListsAction.moveTodos(id: props.id, from: indexSet, to: index))
+    dispatch(TodoListsAction.moveTodos(id: id, from: indexSet, to: index))
   }
   
   func removeTodoLists(at indexSet: IndexSet) {
-    dispatch(TodoListsAction.removeTodos(id: props.id, at: indexSet))
+    dispatch(TodoListsAction.removeTodos(id: id, at: indexSet))
   }
   
   func deselectTodoList() {
     if self.sizeClass == .compact {
       self.dispatch(AppAction.selectTodoList(id: nil))
     }
-  }
-}
-  
-extension TodoListContainer : ParameterizedConnectable {
-  
-  struct Props: Equatable {
-    var id: String
-    var todoIds: [String]
-  }
-  
-  func map(state: AppState, with parameter: String) -> Props? {
-    guard let todoList = state.todoLists[parameter] else { return nil }
-    return Props(
-      id: todoList.id,
-      todoIds: todoList.todoIds
-    )
   }
 }
 
@@ -72,8 +61,7 @@ public enum TodoListContainer_Previews: PreviewProvider {
   }
   
   public static var previews: some View {
-    TodoListContainer()
-      .connect(with: "123")
+    TodoListContainer(id: "123")
     .provideStore(store)
   }
 }

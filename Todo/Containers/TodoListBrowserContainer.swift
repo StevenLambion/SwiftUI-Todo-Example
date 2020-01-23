@@ -2,31 +2,41 @@ import SwiftUI
 import SwiftDux
 import Combine
 
-struct TodoListBrowserContainer : View {
-  @Environment(\.editMode) private var mode
+struct TodoListBrowserContainer : ConnectableView {
+  
+//  struct Props: Equatable {
+//    var todoLists: OrderedState<TodoList>
+//    var selectedTodoListId: String?
+//  }
+  
   @Environment(\.horizontalSizeClass) private var sizeClass
-  @MappedState private var props: Props
   @MappedDispatch() private var dispatch
   
-  var body: some View {
+  func map(state: AppState) -> AppState? {
+    state
+  }
+  
+  func body(props: Props) -> some View {
     List {
-      ForEach(props.todoLists, content: renderRow)
-        .onMove(perform: moveTodoList)
-        .onDelete(perform: removeTodoLists)
+      ForEach(props.todoLists) { todoList in
+        self.renderRow(props: props, todoList: todoList)
+      }
+      .onMove(perform: moveTodoList)
+      .onDelete(perform: removeTodoLists)
     }
     .navigationBarTitle(Text("Todo Lists"))
     .navigationBarItems(
       leading: EditButton(),
       trailing: AddButton { self.dispatch(TodoListsAction.addNewTodoList()) }
     )
-    .onAppear(perform: selectDefaultTodoList)
+      .onAppear { self.selectDefaultTodoList(props: props) }
   }
   
-  func renderRow(todoList: TodoList) -> some View {
+  func renderRow(props: Props, todoList: TodoList) -> some View {
     TodoListRow(
       todoList: todoList,
       selected: Binding(
-        get: { self.props.selectedTodoListId == todoList.id },
+        get: { props.selectedTodoListId == todoList.id },
         set: { if $0 == true { self.selectTodoList(id: todoList.id) } }
       ),
       destination: self.renderTodoList
@@ -34,7 +44,7 @@ struct TodoListBrowserContainer : View {
   }
   
   func renderTodoList(id: String) -> some View {
-    TodoListContainer().connect(with: id)
+    TodoListContainer(id: id)
   }
   
   func addNewTodoList() {
@@ -53,27 +63,11 @@ struct TodoListBrowserContainer : View {
     dispatch(AppAction.selectTodoList(id: id))
   }
   
-  func selectDefaultTodoList() {
+  func selectDefaultTodoList(props: Props) {
     guard props.selectedTodoListId == nil && sizeClass == .regular else { return }
     dispatch(AppAction.selectTodoList(id: props.todoLists.first?.id))
   }
 
-}
-
-extension TodoListBrowserContainer : Connectable {
-  
-  struct Props: Equatable {
-    var todoLists: OrderedState<TodoList>
-    var selectedTodoListId: String?
-  }
-  
-  func map(state: AppState) -> Props? {
-    Props(
-      todoLists: state.todoLists,
-      selectedTodoListId: state.selectedTodoListId
-    )
-  }
-  
 }
 
 #if DEBUG
@@ -88,7 +82,6 @@ public enum TodoListBrowserContainer_Previews: PreviewProvider {
   public static var previews: some View {
     NavigationView {
       TodoListBrowserContainer()
-        .connect()
         .provideStore(store)
     }
   }

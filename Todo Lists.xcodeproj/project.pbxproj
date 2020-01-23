@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A904010723D890FD004D65F1 /* SwiftDux in Frameworks */ = {isa = PBXBuildFile; productRef = A904010623D890FD004D65F1 /* SwiftDux */; };
+		A9307ECA23D91EF0005F5C96 /* SwiftDux in Frameworks */ = {isa = PBXBuildFile; productRef = A9307EC923D91EF0005F5C96 /* SwiftDux */; };
 		A976F54F23D3D88E00004B33 /* TodosAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A976F54E23D3D88E00004B33 /* TodosAction.swift */; };
 		A991C7C523D4E63D00AD7AA3 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A991C7C423D4E63D00AD7AA3 /* AppAction.swift */; };
 		A991C7DF23D6519F00AD7AA3 /* TodoListNameContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A991C7DE23D6519F00AD7AA3 /* TodoListNameContainer.swift */; };
@@ -50,6 +50,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A904010A23D8BA63004D65F1 /* SwiftDux.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftDux.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A904010C23D8BA63004D65F1 /* SwiftDuxExtras.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftDuxExtras.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A976F54E23D3D88E00004B33 /* TodosAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodosAction.swift; sourceTree = "<group>"; };
 		A991C7C423D4E63D00AD7AA3 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
 		A991C7DE23D6519F00AD7AA3 /* TodoListNameContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListNameContainer.swift; sourceTree = "<group>"; };
@@ -86,7 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A904010723D890FD004D65F1 /* SwiftDux in Frameworks */,
+				A9307ECA23D91EF0005F5C96 /* SwiftDux in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,6 +191,8 @@
 		AA9DA95D22AD8ACF00617E46 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A904010A23D8BA63004D65F1 /* SwiftDux.framework */,
+				A904010C23D8BA63004D65F1 /* SwiftDuxExtras.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -234,7 +238,7 @@
 			);
 			name = "Todo Lists";
 			packageProductDependencies = (
-				A904010623D890FD004D65F1 /* SwiftDux */,
+				A9307EC923D91EF0005F5C96 /* SwiftDux */,
 			);
 			productName = Todo;
 			productReference = AA9DA94122AD8A2100617E46 /* Todo Lists.app */;
@@ -517,14 +521,14 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/StevenLambion/SwiftDux.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				branch = master;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A904010623D890FD004D65F1 /* SwiftDux */ = {
+		A9307EC923D91EF0005F5C96 /* SwiftDux */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A904010523D890FD004D65F1 /* XCRemoteSwiftPackageReference "SwiftDux" */;
 			productName = SwiftDux;

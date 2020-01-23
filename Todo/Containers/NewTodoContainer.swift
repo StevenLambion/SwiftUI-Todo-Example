@@ -2,35 +2,24 @@ import SwiftUI
 import Combine
 import SwiftDux
 
-struct NewTodoContainer : View {
-  @MappedState private var props: Props
+struct NewTodoContainer : ConnectableView {
   @MappedDispatch() private var dispatch
   
-  var body: some View {
-    NewTodoRow(text: self.props.$newTodoText, onAddTodo: self.addNewTodo)
+  var id: String
+  
+  func map(state: AppState, binder: StateBinder) -> Binding<String>? {
+    guard let todoList = state.todoLists[id] else { return nil }
+    return binder.bind(todoList.newTodoText) {
+      TodoListsAction.setNewTodoText(id: todoList.id, text: $0)
+    }
   }
   
-  func addNewTodo(text: String) {
-    dispatch(TodoListsAction.addTodo(id: props.id, text: text))
+  func body(props: Props) -> some View {
+    NewTodoRow(text: props) {
+      self.dispatch(TodoListsAction.addTodo(id: self.id, text: $0))
+    }.padding()
   }
-}
-  
-extension NewTodoContainer : ParameterizedConnectable {
-  
-  struct Props: Equatable {
-    var id: String
-    @Binding var newTodoText: String
-  }
-  
-  func map(state: AppState, with parameter: String, binder: StateBinder) -> Props? {
-    guard let todoList = state.todoLists[parameter] else { return nil }
-    return Props(
-      id: parameter,
-      newTodoText: binder.bind(todoList.newTodoText) {
-        TodoListsAction.setNewTodoText(id: todoList.id, text: $0)
-      }
-    )
-  }
+
 }
 
 #if DEBUG
@@ -43,8 +32,7 @@ public enum NewTodoContainer_Previews: PreviewProvider {
   }
   
   public static var previews: some View {
-    NewTodoContainer()
-      .connect(with: "123")
+    NewTodoContainer(id: "123")
     .provideStore(store)
   }
 }
