@@ -29,7 +29,7 @@ fileprivate let defaultTodos = [
     return todos
   }) { (_, new) in new }
 
-struct AppState : StateType {
+struct AppState: StateType, TodoListsRoot {
   static let currentSchemaVersion = 2
   
   var schemaVersion: Int = currentSchemaVersion

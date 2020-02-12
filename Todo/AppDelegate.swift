@@ -13,16 +13,7 @@ import SwiftDuxExtras
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
-  var store = Store(
-    state: AppState(),
-    reducer: AppReducer(),
-    middleware: [
-      // PrintActionMiddleware(),
-      PersistStateMiddleware(JSONStatePersistor<AppState>()) { state in
-        state.schemaVersion == AppState.currentSchemaVersion
-      }
-    ]
-  )
+  var store = configureStore()
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.

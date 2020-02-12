@@ -45,7 +45,7 @@ struct TodoListContainer : ConnectableView {
   
   func deselectTodoList() {
     if self.sizeClass == .compact {
-      self.dispatch(AppAction.selectTodoList(id: nil))
+      self.dispatch(TodoListsAction.selectTodoList(id: nil))
     }
   }
 }
@@ -53,10 +53,7 @@ struct TodoListContainer : ConnectableView {
 #if DEBUG
 public enum TodoListContainer_Previews: PreviewProvider {
   static var store: Store<AppState> {
-    Store(
-      state: AppState(),
-      reducer: AppReducer()
-    )
+    configureStore()
   }
   
   public static var previews: some View {

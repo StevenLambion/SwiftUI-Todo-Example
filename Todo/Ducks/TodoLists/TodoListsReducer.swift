@@ -1,27 +1,29 @@
 import Foundation
 import SwiftDux
 
-final class TodoListsReducer: Reducer {
+final class TodoListsReducer<State>: Reducer where State: TodoListsRoot {
   
-  func reduce(state: OrderedState<TodoList>, action: TodoListsAction) -> OrderedState<TodoList> {
+  func reduce(state: State, action: TodoListsAction) -> State {
     var state = state
     switch action {
+    case .selectTodoList(let id):
+      state.selectedTodoListId = id
     case .setName(let id, let name):
-      state[id] = updateTodoList(todoList: state[id]) { $0.name = name }
+      state.todoLists[id] = updateTodoList(todoList: state.todoLists[id]) { $0.name = name }
     case .setNewTodoText(let id, let text):
-      state[id] = updateTodoList(todoList: state[id]) { $0.newTodoText = text }
+      state.todoLists[id] = updateTodoList(todoList: state.todoLists[id]) { $0.newTodoText = text }
     case .addTodoId(let id, let todoId):
-      state[id] = updateTodoList(todoList: state[id]) { $0.todoIds.insert(todoId, at: 0) }
+      state.todoLists[id] = updateTodoList(todoList: state.todoLists[id]) { $0.todoIds.insert(todoId, at: 0) }
     case .removeTodoIds(let id, let indexSet):
-      state[id] = updateTodoList(todoList: state[id]) { $0.todoIds.remove(at: indexSet) }
+      state.todoLists[id] = updateTodoList(todoList: state.todoLists[id]) { $0.todoIds.remove(at: indexSet) }
     case .addTodoList(let id, let name):
-      state.append(TodoList(id: id, name: name, newTodoText: "", todoIds: []))
+      state.todoLists.append(TodoList(id: id, name: name, newTodoText: "", todoIds: []))
     case .removeTodoLists(let indexSet):
-      state.remove(at: indexSet)
+      state.todoLists.remove(at: indexSet)
     case .moveTodoLists(let indexSet, let index):
-      state.move(from: indexSet, to: index)
+      state.todoLists.move(from: indexSet, to: index)
     case .moveTodos(let id, let indexSet, let index):
-      state[id] = updateTodoList(todoList: state[id]) { $0.todoIds.move(fromOffsets: indexSet, toOffset: index) }
+      state.todoLists[id] = updateTodoList(todoList: state.todoLists[id]) { $0.todoIds.move(fromOffsets: indexSet, toOffset: index) }
     }
     return state
   }

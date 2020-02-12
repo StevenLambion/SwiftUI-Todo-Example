@@ -7,11 +7,11 @@ struct TodoContainer : ConnectableView {
   var todoId: String
   
   struct Props: Equatable {
-    @Binding var text: String
-    @Binding var completed: Bool
+    @ActionBinding var text: String
+    @ActionBinding var completed: Bool
   }
   
-  func map(state: AppState, binder: StateBinder) -> Props? {
+  func map(state: AppState, binder: ActionBinder) -> Props? {
     guard let todo = state.todos[todoId] else { return nil }
     return Props(
       text: binder.bind(todo.text) { TodosAction.setText(id: todo.id, text: $0) },
@@ -34,10 +34,7 @@ struct TodoContainer : ConnectableView {
 #if DEBUG
 public enum TodoListDetailsRowContainer_Previews: PreviewProvider {
   static var store: Store<AppState> {
-    Store(
-      state: AppState(),
-      reducer: AppReducer()
-    )
+    configureStore()
   }
   
   public static var previews: some View {

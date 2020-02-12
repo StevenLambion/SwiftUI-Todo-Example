@@ -62,12 +62,12 @@ struct TodoListBrowserContainer : ConnectableView {
   }
   
   func selectTodoList(id: String) {
-    dispatch(AppAction.selectTodoList(id: id))
+    dispatch(TodoListsAction.selectTodoList(id: id))
   }
   
   func selectDefaultTodoList(props: Props) {
     guard props.selectedTodoListId == nil && sizeClass == .regular else { return }
-    dispatch(AppAction.selectTodoList(id: props.todoLists.first?.id))
+    dispatch(TodoListsAction.selectTodoList(id: props.todoLists.first?.id))
   }
 
 }
@@ -75,10 +75,7 @@ struct TodoListBrowserContainer : ConnectableView {
 #if DEBUG
 public enum TodoListBrowserContainer_Previews: PreviewProvider {
   static var store: Store<AppState> {
-    Store(
-      state: AppState(),
-      reducer: AppReducer()
-    )
+    configureStore()
   }
   
   public static var previews: some View {

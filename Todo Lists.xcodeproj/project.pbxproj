@@ -8,8 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		A9307ECA23D91EF0005F5C96 /* SwiftDux in Frameworks */ = {isa = PBXBuildFile; productRef = A9307EC923D91EF0005F5C96 /* SwiftDux */; };
+		A96EA6AC23F44F7C0024DBAA /* TodoListsRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96EA6AB23F44F7C0024DBAA /* TodoListsRoot.swift */; };
+		A96EA6AE23F44FB50024DBAA /* TodosRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96EA6AD23F44FB50024DBAA /* TodosRoot.swift */; };
+		A96EA6B023F452250024DBAA /* configureStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96EA6AF23F452250024DBAA /* configureStore.swift */; };
 		A976F54F23D3D88E00004B33 /* TodosAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A976F54E23D3D88E00004B33 /* TodosAction.swift */; };
-		A991C7C523D4E63D00AD7AA3 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A991C7C423D4E63D00AD7AA3 /* AppAction.swift */; };
 		A991C7DF23D6519F00AD7AA3 /* TodoListNameContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A991C7DE23D6519F00AD7AA3 /* TodoListNameContainer.swift */; };
 		A991C7E123D6568400AD7AA3 /* NewTodoContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A991C7E023D6568400AD7AA3 /* NewTodoContainer.swift */; };
 		AA2F1A81231782D3003B088A /* CheckedToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2F1A80231782D3003B088A /* CheckedToggleStyle.swift */; };
@@ -32,7 +34,6 @@
 		AA9DA96922AD8E4C00617E46 /* TodoContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9DA96822AD8E4C00617E46 /* TodoContainer.swift */; };
 		AA9DA96D22AD8FC600617E46 /* TodoListBrowserContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9DA96C22AD8FC600617E46 /* TodoListBrowserContainer.swift */; };
 		AA9DA96F22AD8FED00617E46 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9DA96E22AD8FED00617E46 /* AppState.swift */; };
-		AA9DA97122AD90B100617E46 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9DA97022AD90B100617E46 /* AppReducer.swift */; };
 		AABF238C22D2B45800F332DC /* TodoListsAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABF238B22D2B45800F332DC /* TodoListsAction.swift */; };
 		AAEBBAD122AF159B0014D88C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AAEBBAD022AF159B0014D88C /* README.md */; };
 /* End PBXBuildFile section */
@@ -52,8 +53,10 @@
 /* Begin PBXFileReference section */
 		A904010A23D8BA63004D65F1 /* SwiftDux.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftDux.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A904010C23D8BA63004D65F1 /* SwiftDuxExtras.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftDuxExtras.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A96EA6AB23F44F7C0024DBAA /* TodoListsRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListsRoot.swift; sourceTree = "<group>"; };
+		A96EA6AD23F44FB50024DBAA /* TodosRoot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodosRoot.swift; sourceTree = "<group>"; };
+		A96EA6AF23F452250024DBAA /* configureStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = configureStore.swift; sourceTree = "<group>"; };
 		A976F54E23D3D88E00004B33 /* TodosAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodosAction.swift; sourceTree = "<group>"; };
-		A991C7C423D4E63D00AD7AA3 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
 		A991C7DE23D6519F00AD7AA3 /* TodoListNameContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListNameContainer.swift; sourceTree = "<group>"; };
 		A991C7E023D6568400AD7AA3 /* NewTodoContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTodoContainer.swift; sourceTree = "<group>"; };
 		AA2F1A80231782D3003B088A /* CheckedToggleStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckedToggleStyle.swift; sourceTree = "<group>"; };
@@ -78,7 +81,6 @@
 		AA9DA96822AD8E4C00617E46 /* TodoContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoContainer.swift; sourceTree = "<group>"; };
 		AA9DA96C22AD8FC600617E46 /* TodoListBrowserContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListBrowserContainer.swift; sourceTree = "<group>"; };
 		AA9DA96E22AD8FED00617E46 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
-		AA9DA97022AD90B100617E46 /* AppReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
 		AABF238B22D2B45800F332DC /* TodoListsAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListsAction.swift; sourceTree = "<group>"; };
 		AAEBBAD022AF159B0014D88C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,9 +97,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A96EA6B123F453580024DBAA /* App */ = {
+			isa = PBXGroup;
+			children = (
+				AA9DA96E22AD8FED00617E46 /* AppState.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		A976F54723D3D65E00004B33 /* TodoLists */ = {
 			isa = PBXGroup;
 			children = (
+				A96EA6AB23F44F7C0024DBAA /* TodoListsRoot.swift */,
 				AA9DA96222AD8B5900617E46 /* TodoList.swift */,
 				AABF238B22D2B45800F332DC /* TodoListsAction.swift */,
 				AA427B0822C3D097005A4368 /* TodoListsReducer.swift */,
@@ -113,19 +124,10 @@
 			path = Styles;
 			sourceTree = "<group>";
 		};
-		AA427B0022C31B28005A4368 /* App */ = {
-			isa = PBXGroup;
-			children = (
-				AA9DA96E22AD8FED00617E46 /* AppState.swift */,
-				AA9DA97022AD90B100617E46 /* AppReducer.swift */,
-				A991C7C423D4E63D00AD7AA3 /* AppAction.swift */,
-			);
-			path = App;
-			sourceTree = "<group>";
-		};
 		AA427B0122C31B35005A4368 /* Todos */ = {
 			isa = PBXGroup;
 			children = (
+				A96EA6AD23F44FB50024DBAA /* TodosRoot.swift */,
 				AA9DA96422AD8BA100617E46 /* Todo.swift */,
 				AA427AC922C02E75005A4368 /* TodosReducer.swift */,
 				A976F54E23D3D88E00004B33 /* TodosAction.swift */,
@@ -200,9 +202,10 @@
 		AA9DA96022AD8B2A00617E46 /* Ducks */ = {
 			isa = PBXGroup;
 			children = (
-				AA427B0022C31B28005A4368 /* App */,
+				A96EA6B123F453580024DBAA /* App */,
 				A976F54723D3D65E00004B33 /* TodoLists */,
 				AA427B0122C31B35005A4368 /* Todos */,
+				A96EA6AF23F452250024DBAA /* configureStore.swift */,
 			);
 			path = Ducks;
 			sourceTree = "<group>";
@@ -311,13 +314,14 @@
 				AA9DA96922AD8E4C00617E46 /* TodoContainer.swift in Sources */,
 				AA2F1A81231782D3003B088A /* CheckedToggleStyle.swift in Sources */,
 				A991C7E123D6568400AD7AA3 /* NewTodoContainer.swift in Sources */,
-				A991C7C523D4E63D00AD7AA3 /* AppAction.swift in Sources */,
 				AA9DA94722AD8A2100617E46 /* SceneDelegate.swift in Sources */,
 				AA94FB9822F4D869008D0272 /* TodoListNameField.swift in Sources */,
+				A96EA6B023F452250024DBAA /* configureStore.swift in Sources */,
+				A96EA6AE23F44FB50024DBAA /* TodosRoot.swift in Sources */,
 				AA94FB9522F4D7F8008D0272 /* TodoRow.swift in Sources */,
 				AA9DA96F22AD8FED00617E46 /* AppState.swift in Sources */,
 				AA427ACA22C02E75005A4368 /* TodosReducer.swift in Sources */,
-				AA9DA97122AD90B100617E46 /* AppReducer.swift in Sources */,
+				A96EA6AC23F44F7C0024DBAA /* TodoListsRoot.swift in Sources */,
 				AA94FB9C22F4D969008D0272 /* AddButton.swift in Sources */,
 				AA9DA94922AD8A2100617E46 /* TodoListContainer.swift in Sources */,
 				AA9DA96322AD8B5900617E46 /* TodoList.swift in Sources */,
@@ -521,7 +525,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/StevenLambion/SwiftDux.git";
 			requirement = {
-				branch = master;
+				branch = "swift-5.2";
 				kind = branch;
 			};
 		};

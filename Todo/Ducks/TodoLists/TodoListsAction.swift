@@ -2,6 +2,7 @@ import Foundation
 import SwiftDux
 
 enum TodoListsAction: Action {
+  case selectTodoList(id: String?)
   case addTodoList(id: String, name: String)
   case removeTodoLists(at: IndexSet)
   case moveTodoLists(from: IndexSet, to: Int)
@@ -14,15 +15,15 @@ enum TodoListsAction: Action {
 
 extension TodoListsAction {
   
-  static func addNewTodoList() -> ActionPlan<AppState> {
+  static func addNewTodoList() -> ActionPlan<TodoListsRoot> {
     ActionPlan { store in
       let id = UUID().uuidString
       store.send(TodoListsAction.addTodoList(id: id, name: ""))
-      store.send(AppAction.selectTodoList(id: id))
+      store.send(TodoListsAction.selectTodoList(id: id))
     }
   }
   
-  static func addTodo(id: String, text: String) -> ActionPlan<AppState> {
+  static func addTodo(id: String, text: String) -> ActionPlan<TodoListsRoot> {
     ActionPlan { store in
       let todoId = UUID().uuidString
       store.send(TodosAction.addTodo(id: todoId, text: text))
@@ -30,7 +31,7 @@ extension TodoListsAction {
     }
   }
   
-  static func removeTodos(id: String, at indexSet: IndexSet) -> ActionPlan<AppState> {
+  static func removeTodos(id: String, at indexSet: IndexSet) -> ActionPlan<TodoListsRoot> {
     ActionPlan { store in
       let todoIds: [String] = store.state.todoLists[id]?.todoIds ?? []
       store.send(TodosAction.removeTodos(ids: indexSet.map { todoIds[$0] }))
@@ -38,7 +39,7 @@ extension TodoListsAction {
     }
   }
    
-  static func toggleTodoCompeletion(id: String, todoId: String, completed: Bool) -> ActionPlan<AppState> {
+  static func toggleTodoCompeletion(id: String, todoId: String, completed: Bool) -> ActionPlan<TodoListsRoot> {
     ActionPlan { store in
       let todoLists = store.state.todoLists
       let todos = store.state.todos

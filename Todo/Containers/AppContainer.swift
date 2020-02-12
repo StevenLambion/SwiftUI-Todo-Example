@@ -15,10 +15,7 @@ struct AppContainer : View {
 #if DEBUG
 public enum AppContainer_Previews: PreviewProvider {
   static var store: Store<AppState> {
-    Store(
-      state: AppState(),
-      reducer: AppReducer()
-    )
+    configureStore()
   }
   
   public static var previews: some View {

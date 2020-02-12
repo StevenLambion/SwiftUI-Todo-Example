@@ -1,20 +1,19 @@
-
 import Foundation
 import SwiftDux
 
-final class TodosReducer: Reducer {
+final class TodosReducer<State>: Reducer where State: TodosRoot  {
   
-  func reduce(state: [String:Todo], action: TodosAction) -> [String:Todo] {
+  func reduce(state: State, action: TodosAction) -> State {
     var state = state
     switch action {
     case .addTodo(let id, let text):
-      state[id] = Todo(id: id, text: text)
+      state.todos[id] = Todo(id: id, text: text)
     case .setText(let id, let text):
-      state[id] = updateTodo(todo: state[id]) { $0.text = text }
+      state.todos[id] = updateTodo(todo: state.todos[id]) { $0.text = text }
     case .setCompleted(let id, let completed):
-      state[id] = updateTodo(todo: state[id]) { $0.completed = completed }
+      state.todos[id] = updateTodo(todo: state.todos[id]) { $0.completed = completed }
     case .removeTodos(let ids):
-      ids.forEach { state.removeValue(forKey: $0) }
+      ids.forEach { state.todos.removeValue(forKey: $0) }
     }
     return state
   }
