@@ -1,25 +1,26 @@
 import SwiftUI
 import SwiftDux
 
-struct AppContainer : View {
+struct TodoListSceneContainer : View {
+  var todoListId: String
   var store: Store<AppState>
   
   var body: some View {
     NavigationView {
-      TodoListBrowserContainer()
+      TodoListContainer(id: todoListId)
       AnyView(Text("Select a todo list."))
     }.provideStore(store)
   }
 }
 
 #if DEBUG
-public enum AppContainer_Previews: PreviewProvider {
+public enum TodoListSceneContainer_Previews: PreviewProvider {
   static var store: Store<AppState> {
     configureStore()
   }
   
   public static var previews: some View {
-    AppContainer(store: store)
+    TodoListSceneContainer(todoListId: "123", store: store)
   }
 }
 #endif

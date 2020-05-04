@@ -2,11 +2,11 @@ import SwiftUI
 
 struct TodoListRow<Destination> : View where Destination: View {
   var todoList: TodoList
-  @Binding var selected: Bool
-  var destination: (String) -> Destination
+  @Binding var selectedId: String?
+  var destination: Destination
   
   var body: some View {
-    NavigationLink(destination: destination(todoList.id), isActive: $selected) {
+    NavigationLink(destination: destination, tag: todoList.id, selection: $selectedId) {
       Text(verbatim: todoList.name.isEmpty ? "Untitled todo list" : todoList.name)
     }
   }
@@ -22,13 +22,11 @@ public enum TodoListRow_Previews: PreviewProvider {
       newTodoText: "",
       todoIds: []
     )
-    @State private var selected: Bool = false
+    @State private var selected: String? = "1"
     
     var body: some View {
       NavigationView {
-        TodoListRow(todoList: todoList, selected: $selected) { id in
-          Text("Destination: \(id)")
-        }
+        TodoListRow(todoList: todoList, selectedId: $selected, destination: Text("Destination"))
       }
     }
   }

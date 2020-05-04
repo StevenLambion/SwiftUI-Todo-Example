@@ -4,72 +4,57 @@ import Combine
 
 struct TodoListBrowserContainer : ConnectableView {
   @Environment(\.horizontalSizeClass) private var sizeClass
-  @MappedDispatch() private var dispatch
   
-  struct Props: Equatable {
-    var todoLists: OrderedState<TodoList>
-    var selectedTodoListId: String?
-  }
-  
-  func map(state: AppState) -> Props? {
+  func map(state: AppState, binder: ActionBinder) -> Props? {
     Props(
       todoLists: state.todoLists,
-      selectedTodoListId: state.selectedTodoListId
+      selectedTodoListId: binder.bind(state.selectedTodoListId) {
+        TodoListsAction.selectTodoList(id: $0)
+      },
+      addNewTodoList: binder.bind(TodoListsAction.addNewTodoList),
+      moveTodoLists: binder.bind { TodoListsAction.moveTodoLists(from: $0, to: $1) },
+      removeTodoLists: binder.bind { TodoListsAction.removeTodoLists(at: $0) },
+      selectDefaultTodoList: binder.bind {
+        guard state.selectedTodoListId == nil && self.sizeClass == .regular else { return nil }
+        return TodoListsAction.selectTodoList(id: state.todoLists.first?.id)
+      }
     )
   }
   
   func body(props: Props) -> some View {
     List {
       ForEach(props.todoLists) { todoList in
-        self.renderRow(props: props, todoList: todoList)
+        self.row(todoList: todoList, selectedTodoListId: props.$selectedTodoListId)
       }
-      .onMove(perform: moveTodoList)
-      .onDelete(perform: removeTodoLists)
+      .onMove(perform: props.moveTodoLists)
+      .onDelete(perform: props.removeTodoLists)
     }
     .navigationBarTitle(Text("Todo Lists"))
     .navigationBarItems(
       leading: EditButton(),
-      trailing: AddButton { self.dispatch(TodoListsAction.addNewTodoList()) }
+      trailing: AddButton(onAdd: props.addNewTodoList)
     )
-      .onAppear { self.selectDefaultTodoList(props: props) }
+    .onAppear { props.selectDefaultTodoList() }
   }
   
-  func renderRow(props: Props, todoList: TodoList) -> some View {
+  func row(todoList: TodoList, selectedTodoListId: Binding<String?>) -> some View {
     TodoListRow(
       todoList: todoList,
-      selected: Binding(
-        get: { props.selectedTodoListId == todoList.id },
-        set: { if $0 == true { self.selectTodoList(id: todoList.id) } }
-      ),
-      destination: self.renderTodoList
+      selectedId: selectedTodoListId,
+      destination: TodoListContainer(id: todoList.id)
     )
   }
-  
-  func renderTodoList(id: String) -> some View {
-    TodoListContainer(id: id)
-  }
-  
-  func addNewTodoList() {
-    dispatch(TodoListsAction.addNewTodoList())
-  }
-  
-  func moveTodoList(from indexSet: IndexSet, to index: Int) {
-    dispatch(TodoListsAction.moveTodoLists(from: indexSet, to: index))
-  }
-  
-  func removeTodoLists(at indexSet: IndexSet) {
-    dispatch(TodoListsAction.removeTodoLists(at: indexSet))
-  }
-  
-  func selectTodoList(id: String) {
-    dispatch(TodoListsAction.selectTodoList(id: id))
-  }
-  
-  func selectDefaultTodoList(props: Props) {
-    guard props.selectedTodoListId == nil && sizeClass == .regular else { return }
-    dispatch(TodoListsAction.selectTodoList(id: props.todoLists.first?.id))
-  }
+}
 
+extension TodoListBrowserContainer{
+  struct Props: Equatable {
+    var todoLists: OrderedState<TodoList>
+    @ActionBinding var selectedTodoListId: String?
+    @ActionBinding var addNewTodoList: ()->()
+    @ActionBinding var moveTodoLists: (IndexSet, Int)->()
+    @ActionBinding var removeTodoLists: (IndexSet)->()
+    @ActionBinding var selectDefaultTodoList: ()->()
+  }
 }
 
 #if DEBUG
