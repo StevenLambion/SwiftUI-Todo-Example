@@ -1,13 +1,12 @@
 import SwiftUI
+import AppNavigation
 
-struct TodoListRow<Destination> : View where Destination: View {
+struct TodoListRow : View {
   var todoList: TodoList
-  @Binding var selectedId: String?
-  var destination: Destination
   
   var body: some View {
-    NavigationLink(destination: destination, tag: todoList.id, selection: $selectedId) {
-      Text(verbatim: todoList.name.isEmpty ? "Untitled todo list" : todoList.name)
+    RouteLink(path: todoList.id) {
+      Text(verbatim: self.todoList.name.isEmpty ? "Untitled todo list" : self.todoList.name)
     }
   }
 }
@@ -26,7 +25,7 @@ public enum TodoListRow_Previews: PreviewProvider {
     
     var body: some View {
       NavigationView {
-        TodoListRow(todoList: todoList, selectedId: $selected, destination: Text("Destination"))
+        TodoListRow(todoList: todoList)
       }
     }
   }

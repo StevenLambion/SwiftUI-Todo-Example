@@ -1,5 +1,6 @@
 import Foundation
 import SwiftDux
+import AppNavigation
 
 fileprivate let defaultTodoList = OrderedState(
   TodoList(
@@ -29,10 +30,11 @@ fileprivate let defaultTodos = [
     return todos
   }) { (_, new) in new }
 
-struct AppState: StateType, TodoListsRoot {
+struct AppState: StateType, TodoListsRoot, NavigationStateRoot {
   static let currentSchemaVersion = 2
   
   var schemaVersion: Int = currentSchemaVersion
+  var navigation: NavigationState = NavigationState()
   var todoLists: OrderedState<TodoList> = defaultTodoList
   var todos: [String:Todo] = defaultTodos
   var selectedTodoListId: String? = nil

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A9196F8C246B4887008402CB /* SwiftDuxNavigation in Frameworks */ = {isa = PBXBuildFile; productRef = A9196F8B246B4887008402CB /* SwiftDuxNavigation */; };
 		A9307ECA23D91EF0005F5C96 /* SwiftDux in Frameworks */ = {isa = PBXBuildFile; productRef = A9307EC923D91EF0005F5C96 /* SwiftDux */; };
 		A94FAF0F24608EF9005F9F4B /* MainSceneContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94FAF0E24608EF9005F9F4B /* MainSceneContainer.swift */; };
 		A96EA6AC23F44F7C0024DBAA /* TodoListsRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96EA6AB23F44F7C0024DBAA /* TodoListsRoot.swift */; };
@@ -86,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9196F8C246B4887008402CB /* SwiftDuxNavigation in Frameworks */,
 				A9307ECA23D91EF0005F5C96 /* SwiftDux in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -236,6 +238,7 @@
 			name = "Todo Lists";
 			packageProductDependencies = (
 				A9307EC923D91EF0005F5C96 /* SwiftDux */,
+				A9196F8B246B4887008402CB /* SwiftDuxNavigation */,
 			);
 			productName = Todo;
 			productReference = AA9DA94122AD8A2100617E46 /* Todo Lists.app */;
@@ -267,6 +270,7 @@
 			mainGroup = AA9DA93822AD8A2100617E46;
 			packageReferences = (
 				A904010523D890FD004D65F1 /* XCRemoteSwiftPackageReference "SwiftDux" */,
+				A9196F5F246AFE98008402CB /* XCRemoteSwiftPackageReference "SwiftDuxRouting" */,
 			);
 			productRefGroup = AA9DA94222AD8A2100617E46 /* Products */;
 			projectDirPath = "";
@@ -517,13 +521,26 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/StevenLambion/SwiftDux.git";
 			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 1.2.0;
+				branch = master;
+				kind = branch;
+			};
+		};
+		A9196F5F246AFE98008402CB /* XCRemoteSwiftPackageReference "SwiftDuxRouting" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/StevenLambion/SwiftDuxRouting.git";
+			requirement = {
+				branch = master;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A9196F8B246B4887008402CB /* SwiftDuxNavigation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A9196F5F246AFE98008402CB /* XCRemoteSwiftPackageReference "SwiftDuxRouting" */;
+			productName = SwiftDuxNavigation;
+		};
 		A9307EC923D91EF0005F5C96 /* SwiftDux */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A904010523D890FD004D65F1 /* XCRemoteSwiftPackageReference "SwiftDux" */;

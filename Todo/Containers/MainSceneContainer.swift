@@ -1,14 +1,16 @@
 import SwiftUI
 import SwiftDux
+import AppNavigation
 
 struct MainSceneContainer : View {
   var store: Store<AppState>
   
   var body: some View {
-    NavigationView {
+    StackNavigationView {
       TodoListBrowserContainer()
-      AnyView(Text("Select a todo list."))
-    }.provideStore(store)
+    }
+    .provideStore(store)
+    .provideStore(store, as: NavigationStateRoot.self)
   }
 }
 

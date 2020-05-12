@@ -8,9 +8,6 @@ struct TodoListBrowserContainer : ConnectableView {
   func map(state: AppState, binder: ActionBinder) -> Props? {
     Props(
       todoLists: state.todoLists,
-      selectedTodoListId: binder.bind(state.selectedTodoListId) {
-        TodoListsAction.selectTodoList(id: $0)
-      },
       addNewTodoList: binder.bind(TodoListsAction.addNewTodoList),
       moveTodoLists: binder.bind { TodoListsAction.moveTodoLists(from: $0, to: $1) },
       removeTodoLists: binder.bind { TodoListsAction.removeTodoLists(at: $0) },
@@ -24,7 +21,7 @@ struct TodoListBrowserContainer : ConnectableView {
   func body(props: Props) -> some View {
     List {
       ForEach(props.todoLists) { todoList in
-        self.row(todoList: todoList, selectedTodoListId: props.$selectedTodoListId)
+        TodoListRow(todoList: todoList)
       }
       .onMove(perform: props.moveTodoLists)
       .onDelete(perform: props.removeTodoLists)
@@ -35,21 +32,15 @@ struct TodoListBrowserContainer : ConnectableView {
       trailing: AddButton(onAdd: props.addNewTodoList)
     )
     .onAppear { props.selectDefaultTodoList() }
-  }
-  
-  func row(todoList: TodoList, selectedTodoListId: Binding<String?>) -> some View {
-    TodoListRow(
-      todoList: todoList,
-      selectedId: selectedTodoListId,
-      destination: TodoListContainer(id: todoList.id)
-    )
+    .addStackRoute { id in
+      TodoListContainer(id: id)
+    }
   }
 }
 
 extension TodoListBrowserContainer{
   struct Props: Equatable {
     var todoLists: OrderedState<TodoList>
-    @ActionBinding var selectedTodoListId: String?
     @ActionBinding var addNewTodoList: ()->()
     @ActionBinding var moveTodoLists: (IndexSet, Int)->()
     @ActionBinding var removeTodoLists: (IndexSet)->()
