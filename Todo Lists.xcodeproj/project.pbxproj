@@ -521,8 +521,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/StevenLambion/SwiftDux.git";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.1;
 			};
 		};
 		A9196F5F246AFE98008402CB /* XCRemoteSwiftPackageReference "SwiftDuxRouting" */ = {

@@ -6,8 +6,10 @@ struct MainSceneContainer : View {
   var store: Store<AppState>
   
   var body: some View {
-    StackNavigationView {
-      TodoListBrowserContainer()
+    RootNavigationView {
+      StackNavigationView {
+        TodoListBrowserContainer()
+      }
     }
     .provideStore(store)
     .provideStore(store, as: NavigationStateRoot.self)

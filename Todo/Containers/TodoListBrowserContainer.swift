@@ -32,7 +32,7 @@ struct TodoListBrowserContainer : ConnectableView {
       trailing: AddButton(onAdd: props.addNewTodoList)
     )
     .onAppear { props.selectDefaultTodoList() }
-    .addStackRoute { id in
+    .stackRoute { id in
       TodoListContainer(id: id)
     }
   }
