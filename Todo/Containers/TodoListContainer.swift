@@ -32,7 +32,9 @@ struct TodoListContainer : ConnectableView {
     }
     .onDisappear {
       if self.sizeClass == .compact {
-        props.deselectTodoList()
+        DispatchQueue.main.async {
+          props.deselectTodoList()
+        }
       }
     }
   }
@@ -45,6 +47,8 @@ struct TodoListContainer : ConnectableView {
       .onMove(perform: props.moveTodoLists)
       .onDelete(perform: props.removeTodoLists)
     }
+    .navigationBarTitle(Text(""), displayMode: .inline)
+    .stackNavigationBarTintColor(.white)
   }
 }
 

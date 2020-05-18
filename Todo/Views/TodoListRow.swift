@@ -5,7 +5,7 @@ struct TodoListRow : View {
   var todoList: TodoList
   
   var body: some View {
-    RouteLink(path: todoList.id) {
+    RouteLink(path: "todoList/\(todoList.id)", isDetail: true) {
       Text(verbatim: self.todoList.name.isEmpty ? "Untitled todo list" : self.todoList.name)
     }
   }
