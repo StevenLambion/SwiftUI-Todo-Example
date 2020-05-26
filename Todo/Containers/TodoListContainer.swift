@@ -5,9 +5,7 @@ import SwiftDux
 struct TodoListContainer : ConnectableView {
   var id: String
   
-  @Environment(\.horizontalSizeClass) private var sizeClass
-  
-  func map(state: AppState, binder: ActionBinder) -> Props? {
+  func map(state: TodoListsRoot, binder: ActionBinder) -> Props? {
     guard let todoList = state.todoLists[id] else { return nil }
     return Props(
       todoIds: todoList.todoIds,
@@ -19,8 +17,7 @@ struct TodoListContainer : ConnectableView {
       },
       onAddTodo: binder.bind { TodoListsAction.addTodo(id: self.id, text: $0) },
       moveTodoLists: binder.bind { TodoListsAction.moveTodos(id: self.id, from: $0, to: $1) },
-      removeTodoLists: binder.bind { TodoListsAction.removeTodos(id: self.id, at: $0) },
-      deselectTodoList: binder.bind { TodoListsAction.selectTodoList(id: nil) }
+      removeTodoLists: binder.bind { TodoListsAction.removeTodos(id: self.id, at: $0) }
     )
   }
   
@@ -29,13 +26,6 @@ struct TodoListContainer : ConnectableView {
       TodoListNameField(name: props.$name)
       NewTodoRow(text: props.$newTodoText, onAddTodo: props.onAddTodo).padding()
       renderList(props: props)
-    }
-    .onDisappear {
-      if self.sizeClass == .compact {
-        DispatchQueue.main.async {
-          props.deselectTodoList()
-        }
-      }
     }
   }
   
@@ -48,7 +38,6 @@ struct TodoListContainer : ConnectableView {
       .onDelete(perform: props.removeTodoLists)
     }
     .navigationBarTitle(Text(""), displayMode: .inline)
-    .stackNavigationBarTintColor(.white)
   }
 }
 
@@ -60,7 +49,6 @@ extension TodoListContainer {
     @ActionBinding var onAddTodo: (String)->()
     @ActionBinding var moveTodoLists: (IndexSet, Int)->()
     @ActionBinding var removeTodoLists: (IndexSet)->()
-    @ActionBinding var deselectTodoList: ()->()
   }
 }
 

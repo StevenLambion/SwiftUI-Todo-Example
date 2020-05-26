@@ -1,5 +1,6 @@
 import Foundation
 import SwiftDux
+import AppNavigation
 
 enum TodoListsAction: Action {
   case selectTodoList(id: String?)
@@ -19,7 +20,7 @@ extension TodoListsAction {
     ActionPlan { store in
       let id = UUID().uuidString
       store.send(TodoListsAction.addTodoList(id: id, name: ""))
-      store.send(TodoListsAction.selectTodoList(id: id))
+      store.send(NavigationAction.navigate(to: "todoList/\(id)", isDetail: true))
     }
   }
   

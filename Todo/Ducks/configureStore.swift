@@ -8,6 +8,7 @@ func configureStore() -> Store<AppState> {
     state: AppState(),
     reducer: TodoListsReducer() + TodosReducer() + NavigationReducer(),
     middleware: (
+      NavigationMiddleware() +
       PersistStateMiddleware(JSONStatePersistor()) { state in
         state.schemaVersion == AppState.currentSchemaVersion
       }

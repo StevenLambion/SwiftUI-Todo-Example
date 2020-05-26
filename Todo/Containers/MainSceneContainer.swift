@@ -6,20 +6,8 @@ struct MainSceneContainer : View {
   var store: Store<AppState>
   
   var body: some View {
-    RootNavigationView {
-      SplitNavigationView {
-        TodoListBrowserContainer()
-      }
-      .detailRoute {
-        Text("Select or add a new a Todo List.")
-      }
-      .detailRoute("todoList") { (id: String) in
-        TodoListContainer(id: id)
-      }
-    }
-    .provideStore(store)
-    .provideStore(store, as: NavigationStateRoot.self)
-  }
+    TodoListBrowserContainer().provideStore(store)
+  } 
 }
 
 #if DEBUG

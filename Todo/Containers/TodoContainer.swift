@@ -6,12 +6,7 @@ struct TodoContainer : ConnectableView {
   var todoListId: String
   var todoId: String
   
-  struct Props: Equatable {
-    @ActionBinding var text: String
-    @ActionBinding var completed: Bool
-  }
-  
-  func map(state: AppState, binder: ActionBinder) -> Props? {
+  func map(state: TodosRoot, binder: ActionBinder) -> Props? {
     guard let todo = state.todos[todoId] else { return nil }
     return Props(
       text: binder.bind(todo.text) { TodosAction.setText(id: todo.id, text: $0) },
@@ -28,7 +23,13 @@ struct TodoContainer : ConnectableView {
   func body(props: Props) -> some View {
     TodoRow(completed: props.$completed, text: props.$text)
   }
-  
+}
+
+extension TodoContainer {
+  struct Props: Equatable {
+    @ActionBinding var text: String
+    @ActionBinding var completed: Bool
+  }
 }
 
 #if DEBUG

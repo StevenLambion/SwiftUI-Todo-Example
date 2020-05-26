@@ -13,7 +13,6 @@ struct NewTodoRow : View {
     onAddTodo(text)
     text = ""
   }
-
 }
 
 #if DEBUG
