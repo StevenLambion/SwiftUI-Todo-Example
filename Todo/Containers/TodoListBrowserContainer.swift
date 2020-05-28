@@ -9,10 +9,14 @@ struct TodoListBrowserContainer : ConnectableView {
   @MappedDispatch() private var dispatch
   
   func map(state: TodoListsRoot & NavigationStateRoot, binder: ActionBinder) -> Props? {
-    let scene = waypoint.resolveSceneState(in: state)
+    let route = waypoint.resolveRoute(in: state, isDetail: true)
+    let selectedId = route?.legsByPath["/todoLists/"]?.component
     return Props(
       todoLists: state.todoLists,
-      selectedTodoListId: scene?.detailRoute.legsByPath["/todoList/"]?.component,
+      selectedId: binder.bind(selectedId) { id in
+        guard let id = id else { return nil }
+        return self.waypoint.navigate(to: "todoLists/\(id)", isDetail: true)
+      },
       addNewTodoList: binder.bind(TodoListsAction.addNewTodoList),
       moveTodoLists: binder.bind { TodoListsAction.moveTodoLists(from: $0, to: $1) },
       removeTodoLists: binder.bind { TodoListsAction.removeTodoLists(at: $0) }
@@ -20,9 +24,9 @@ struct TodoListBrowserContainer : ConnectableView {
   }
   
   func body(props: Props) -> some View {
-    if sizeClass != .compact && props.selectedTodoListId == nil {
+    if sizeClass != .compact && props.selectedId == nil {
       if let id = props.todoLists.first?.id {
-        dispatch(waypoint.navigate(to: "todoList/\(id)", isDetail: true))
+        dispatch(waypoint.navigate(to: "todoLists/\(id)", isDetail: true))
       }
     }
     return SplitNavigationView {
@@ -31,7 +35,7 @@ struct TodoListBrowserContainer : ConnectableView {
     .detailItem {
       Text("Select or add a new a Todo List.")
     }
-    .detailItem("todoList") { (id: String) in
+    .detailItem("todoLists") { (id: String) in
       TodoListContainer(id: id)
     }
   }
@@ -39,7 +43,7 @@ struct TodoListBrowserContainer : ConnectableView {
   func list(props: Props) -> some View {
     List {
       ForEach(props.todoLists) { todoList in
-        TodoListRow(todoList: todoList, selected: props.selectedTodoListId == todoList.id)
+        TodoListRow(todoList: todoList, selectedId: props.$selectedId)
       }
       .onMove(perform: props.moveTodoLists)
       .onDelete(perform: props.removeTodoLists)
@@ -55,7 +59,7 @@ struct TodoListBrowserContainer : ConnectableView {
 extension TodoListBrowserContainer{
   struct Props: Equatable {
     var todoLists: OrderedState<TodoList>
-    var selectedTodoListId: String?
+    @ActionBinding var selectedId: String?
     @ActionBinding var addNewTodoList: ()->()
     @ActionBinding var moveTodoLists: (IndexSet, Int)->()
     @ActionBinding var removeTodoLists: (IndexSet)->()
