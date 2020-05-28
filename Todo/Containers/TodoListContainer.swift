@@ -27,6 +27,7 @@ struct TodoListContainer : ConnectableView {
       NewTodoRow(text: props.$newTodoText, onAddTodo: props.onAddTodo).padding()
       renderList(props: props)
     }
+    .showSplitViewDisplayModeButton(true)
   }
   
   func renderList(props: Props) -> some View {
