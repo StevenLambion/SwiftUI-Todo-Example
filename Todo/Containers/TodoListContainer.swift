@@ -1,11 +1,13 @@
 import SwiftUI
 import Combine
 import SwiftDux
+import Dispatch
 
 struct TodoListContainer : ConnectableView {
   var id: String
   
   @Environment(\.horizontalSizeClass) private var sizeClass
+  @SwiftUI.State private var animate: Bool = false
   
   func map(state: AppState, binder: ActionBinder) -> Props? {
     guard let todoList = state.todoLists[id] else { return nil }
@@ -44,6 +46,12 @@ struct TodoListContainer : ConnectableView {
       }
       .onMove(perform: props.moveTodoLists)
       .onDelete(perform: props.removeTodoLists)
+    }
+    .animation(animate ? .default : nil)
+    .onAppear {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        animate = true
+      }
     }
   }
 }

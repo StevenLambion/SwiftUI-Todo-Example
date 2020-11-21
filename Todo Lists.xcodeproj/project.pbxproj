@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A9307ECA23D91EF0005F5C96 /* SwiftDux in Frameworks */ = {isa = PBXBuildFile; productRef = A9307EC923D91EF0005F5C96 /* SwiftDux */; };
 		A94FAF0F24608EF9005F9F4B /* MainSceneContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94FAF0E24608EF9005F9F4B /* MainSceneContainer.swift */; };
 		A96EA6AC23F44F7C0024DBAA /* TodoListsRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96EA6AB23F44F7C0024DBAA /* TodoListsRoot.swift */; };
 		A96EA6AE23F44FB50024DBAA /* TodosRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96EA6AD23F44FB50024DBAA /* TodosRoot.swift */; };
 		A96EA6B023F452250024DBAA /* configureStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96EA6AF23F452250024DBAA /* configureStore.swift */; };
 		A976F54F23D3D88E00004B33 /* TodosAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A976F54E23D3D88E00004B33 /* TodosAction.swift */; };
+		A9ABCDEE256989FA00D99848 /* StateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9ABCDED256989FA00D99848 /* StateType.swift */; };
+		A9B1BE2F255CAD9B00BF151F /* SwiftDux in Frameworks */ = {isa = PBXBuildFile; productRef = A9B1BE2E255CAD9B00BF151F /* SwiftDux */; };
 		AA2F1A81231782D3003B088A /* CheckedToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2F1A80231782D3003B088A /* CheckedToggleStyle.swift */; };
 		AA427ACA22C02E75005A4368 /* TodosReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA427AC922C02E75005A4368 /* TodosReducer.swift */; };
 		AA427B0922C3D097005A4368 /* TodoListsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA427B0822C3D097005A4368 /* TodoListsReducer.swift */; };
@@ -56,6 +57,7 @@
 		A96EA6AD23F44FB50024DBAA /* TodosRoot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodosRoot.swift; sourceTree = "<group>"; };
 		A96EA6AF23F452250024DBAA /* configureStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = configureStore.swift; sourceTree = "<group>"; };
 		A976F54E23D3D88E00004B33 /* TodosAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodosAction.swift; sourceTree = "<group>"; };
+		A9ABCDED256989FA00D99848 /* StateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateType.swift; sourceTree = "<group>"; };
 		AA2F1A80231782D3003B088A /* CheckedToggleStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckedToggleStyle.swift; sourceTree = "<group>"; };
 		AA427AC922C02E75005A4368 /* TodosReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodosReducer.swift; sourceTree = "<group>"; };
 		AA427B0822C3D097005A4368 /* TodoListsReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListsReducer.swift; sourceTree = "<group>"; };
@@ -86,7 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9307ECA23D91EF0005F5C96 /* SwiftDux in Frameworks */,
+				A9B1BE2F255CAD9B00BF151F /* SwiftDux in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,6 +204,7 @@
 				A976F54723D3D65E00004B33 /* TodoLists */,
 				AA427B0122C31B35005A4368 /* Todos */,
 				A96EA6AF23F452250024DBAA /* configureStore.swift */,
+				A9ABCDED256989FA00D99848 /* StateType.swift */,
 			);
 			path = Ducks;
 			sourceTree = "<group>";
@@ -235,7 +238,7 @@
 			);
 			name = "Todo Lists";
 			packageProductDependencies = (
-				A9307EC923D91EF0005F5C96 /* SwiftDux */,
+				A9B1BE2E255CAD9B00BF151F /* SwiftDux */,
 			);
 			productName = Todo;
 			productReference = AA9DA94122AD8A2100617E46 /* Todo Lists.app */;
@@ -248,7 +251,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1100;
+				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = "Steven Lambion";
 				TargetAttributes = {
 					AA9DA94022AD8A2100617E46 = {
@@ -318,6 +321,7 @@
 				AA94FB9C22F4D969008D0272 /* AddButton.swift in Sources */,
 				AA9DA94922AD8A2100617E46 /* TodoListContainer.swift in Sources */,
 				AA9DA96322AD8B5900617E46 /* TodoList.swift in Sources */,
+				A9ABCDEE256989FA00D99848 /* StateType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +365,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -385,7 +390,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -421,6 +426,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -439,7 +445,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -517,14 +523,14 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/StevenLambion/SwiftDux.git";
 			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 1.2.0;
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A9307EC923D91EF0005F5C96 /* SwiftDux */ = {
+		A9B1BE2E255CAD9B00BF151F /* SwiftDux */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A904010523D890FD004D65F1 /* XCRemoteSwiftPackageReference "SwiftDux" */;
 			productName = SwiftDux;

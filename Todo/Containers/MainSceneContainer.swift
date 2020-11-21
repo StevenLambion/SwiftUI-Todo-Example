@@ -7,7 +7,7 @@ struct MainSceneContainer : View {
   var body: some View {
     NavigationView {
       TodoListBrowserContainer()
-      AnyView(Text("Select a todo list."))
+      Text("Select a todo list.")
     }.provideStore(store)
   }
 }
