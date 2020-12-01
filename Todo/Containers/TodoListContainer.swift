@@ -1,11 +1,15 @@
 import SwiftUI
 import Combine
 import SwiftDux
+import Dispatch
 
 struct TodoListContainer : ConnectableView {
+  @Environment(\.horizontalSizeClass) private var sizeClass
+  @SwiftUI.State private var animate: Bool = false
+  
   var id: String
   
-  func map(state: TodoListsRoot, binder: ActionBinder) -> Props? {
+  func map(state: AppState, binder: ActionBinder) -> Props? {
     guard let todoList = state.todoLists[id] else { return nil }
     return Props(
       todoIds: todoList.todoIds,
@@ -39,6 +43,12 @@ struct TodoListContainer : ConnectableView {
       .onDelete(perform: props.removeTodoLists)
     }
     .navigationBarTitle(Text(""), displayMode: .inline)
+    .animation(animate ? .default : nil)
+    .onAppear {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        animate = true
+      }
+    }
   }
 }
 
