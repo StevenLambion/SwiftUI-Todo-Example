@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A94FAF0F24608EF9005F9F4B /* MainSceneContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94FAF0E24608EF9005F9F4B /* MainSceneContainer.swift */; };
+		A9688EBE2576B52A00CF4A56 /* SwiftDuxNavigation in Frameworks */ = {isa = PBXBuildFile; productRef = A9688EBD2576B52A00CF4A56 /* SwiftDuxNavigation */; };
 		A96EA6AC23F44F7C0024DBAA /* TodoListsRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96EA6AB23F44F7C0024DBAA /* TodoListsRoot.swift */; };
 		A96EA6AE23F44FB50024DBAA /* TodosRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96EA6AD23F44FB50024DBAA /* TodosRoot.swift */; };
 		A96EA6B023F452250024DBAA /* configureStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96EA6AF23F452250024DBAA /* configureStore.swift */; };
@@ -88,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9688EBE2576B52A00CF4A56 /* SwiftDuxNavigation in Frameworks */,
 				A9B1BE2F255CAD9B00BF151F /* SwiftDux in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -239,6 +241,7 @@
 			name = "Todo Lists";
 			packageProductDependencies = (
 				A9B1BE2E255CAD9B00BF151F /* SwiftDux */,
+				A9688EBD2576B52A00CF4A56 /* SwiftDuxNavigation */,
 			);
 			productName = Todo;
 			productReference = AA9DA94122AD8A2100617E46 /* Todo Lists.app */;
@@ -270,6 +273,7 @@
 			mainGroup = AA9DA93822AD8A2100617E46;
 			packageReferences = (
 				A904010523D890FD004D65F1 /* XCRemoteSwiftPackageReference "SwiftDux" */,
+				A9688EBC2576B52A00CF4A56 /* XCRemoteSwiftPackageReference "SwiftDuxNavigation" */,
 			);
 			productRefGroup = AA9DA94222AD8A2100617E46 /* Products */;
 			projectDirPath = "";
@@ -527,9 +531,22 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		A9688EBC2576B52A00CF4A56 /* XCRemoteSwiftPackageReference "SwiftDuxNavigation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/StevenLambion/SwiftDuxNavigation.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A9688EBD2576B52A00CF4A56 /* SwiftDuxNavigation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A9688EBC2576B52A00CF4A56 /* XCRemoteSwiftPackageReference "SwiftDuxNavigation" */;
+			productName = SwiftDuxNavigation;
+		};
 		A9B1BE2E255CAD9B00BF151F /* SwiftDux */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A904010523D890FD004D65F1 /* XCRemoteSwiftPackageReference "SwiftDux" */;

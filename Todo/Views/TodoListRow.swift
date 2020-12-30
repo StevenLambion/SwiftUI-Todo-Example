@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct TodoListRow : View {
-  var todoList: TodoList
+  var todoList: TodoListBrowserContainer.TodoListSummary
   @Binding var selectedId: String?
   
   var body: some View {
@@ -23,11 +23,9 @@ struct TodoListRow : View {
 public enum TodoListRow_Previews: PreviewProvider {
   
   struct PreviewWrapper: View {
-    @State private var todoList = TodoList(
+    @State private var todoList = TodoListBrowserContainer.TodoListSummary(
       id: "1",
-      name: "TodoList",
-      newTodoText: "",
-      todoIds: []
+      name: "TodoList"
     )
     @State private var selected: String? = "1"
     

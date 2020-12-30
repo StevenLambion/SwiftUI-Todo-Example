@@ -3,20 +3,16 @@ import SwiftDux
 import Combine
 import AppNavigation
 
-struct TodoListBrowserContainer : ConnectableView {
-  @Environment(\.waypoint) private var waypoint
+struct TodoListBrowserContainer : ConnectableView, Equatable {
+  static func == (lhs: Self, rhs: Self) -> Bool {
+    lhs.sizeClass == rhs.sizeClass
+  }
+
   @Environment(\.horizontalSizeClass) private var sizeClass
-  @MappedDispatch() private var dispatch
   
   func map(state: TodoListsRoot & NavigationStateRoot, binder: ActionBinder) -> Props? {
-    let route = waypoint.resolveRoute(in: state, isDetail: true)
-    let selectedId = route?.legsByPath["/todoLists/"]?.component
-    return Props(
-      todoLists: state.todoLists,
-      selectedId: binder.bind(selectedId) { id in
-        guard let id = id else { return nil }
-        return self.waypoint.navigate(to: "todoLists/\(id)", isDetail: true)
-      },
+    Props(
+      todoLists: state.todoLists.map { TodoListSummary(id: $0.id, name: $0.name) },
       addNewTodoList: binder.bind(TodoListsAction.addNewTodoList),
       moveTodoLists: binder.bind { TodoListsAction.moveTodoLists(from: $0, to: $1) },
       removeTodoLists: binder.bind { TodoListsAction.removeTodoLists(at: $0) }
@@ -24,45 +20,38 @@ struct TodoListBrowserContainer : ConnectableView {
   }
   
   func body(props: Props) -> some View {
-    if sizeClass != .compact && props.selectedId == nil {
-      if let id = props.todoLists.first?.id {
-        dispatch(waypoint.navigate(to: "todoLists/\(id)", isDetail: true))
+    Selection(initialValue: sizeClass == .regular ? props.todoLists.first?.id : nil, isDetail: true) { selection in
+      List(selection: selection) {
+        ForEach(props.todoLists) { todoList in
+          TodoListRow(todoList: todoList, selectedId: selection)
+        }
+        .onMove(perform: props.moveTodoLists)
+        .onDelete(perform: props.removeTodoLists)
+      }
+      .listStyle(PlainListStyle())
+      .navigationBarTitle(Text("Todo Lists"))
+      .navigationBarItems(
+        leading: EditButton(),
+        trailing: AddButton(onAdd: props.addNewTodoList)
+      )
+      .stackItem(.parameter()) {
+        TodoListContainer()
       }
     }
-    return SplitNavigationView {
-      list(props: props)
-    }
-    .detailItem {
-      Text("Select or add a new a Todo List.")
-    }
-    .detailItem("todoLists") { (id: String) in
-      TodoListContainer(id: id)
-    }
-  }
-  
-  func list(props: Props) -> some View {
-    List {
-      ForEach(props.todoLists) { todoList in
-        TodoListRow(todoList: todoList, selectedId: props.$selectedId)
-      }
-      .onMove(perform: props.moveTodoLists)
-      .onDelete(perform: props.removeTodoLists)
-    }
-    .navigationBarTitle(Text("Todo Lists"))
-    .navigationBarItems(
-      leading: EditButton(),
-      trailing: AddButton(onAdd: props.addNewTodoList)
-    )
   }
 }
 
 extension TodoListBrowserContainer{
   struct Props: Equatable {
-    var todoLists: OrderedState<TodoList>
-    @ActionBinding var selectedId: String?
+    var todoLists: [TodoListSummary]
     @ActionBinding var addNewTodoList: ()->()
     @ActionBinding var moveTodoLists: (IndexSet, Int)->()
     @ActionBinding var removeTodoLists: (IndexSet)->()
+  }
+  
+  struct TodoListSummary: Identifiable, Equatable {
+    var id: String
+    var name: String
   }
 }
 

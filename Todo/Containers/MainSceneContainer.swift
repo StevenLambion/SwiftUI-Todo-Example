@@ -6,10 +6,13 @@ struct MainSceneContainer : View {
   var store: Store<AppState>
   
   var body: some View {
-    NavigationView {
-      TodoListBrowserContainer()
-      Text("Select a todo list.")
-    }.provideStore(store)
+    Route(name: "main") {
+      NavigationView {
+        TodoListBrowserContainer()
+        Text("Select a todo list.")
+      }
+    }
+    .provideStore(store)
   }
 }
 

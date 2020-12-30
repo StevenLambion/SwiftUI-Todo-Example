@@ -4,14 +4,16 @@ import SwiftDuxExtras
 import AppNavigation
 
 func configureStore() -> Store<AppState> {
-  Store(
+  let middleware = (
+    NavigationMiddleware<AppState>() +
+    PrintActionMiddleware() +
+    PersistStateMiddleware(JSONStatePersistor()) { state in
+      state.schemaVersion == AppState.currentSchemaVersion
+    }
+  )
+  return Store(
     state: AppState(),
     reducer: TodoListsReducer() + TodosReducer() + NavigationReducer(),
-    middleware: (
-      NavigationMiddleware() +
-      PersistStateMiddleware(JSONStatePersistor()) { state in
-        state.schemaVersion == AppState.currentSchemaVersion
-      }
-    )
+    middleware: middleware
   )
 }

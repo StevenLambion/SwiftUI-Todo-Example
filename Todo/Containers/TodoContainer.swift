@@ -2,7 +2,7 @@ import SwiftUI
 import SwiftDux
 import Combine
 
-struct TodoContainer : ConnectableView {
+struct TodoContainer : ConnectableView, Equatable {
   var todoListId: String
   var todoId: String
   

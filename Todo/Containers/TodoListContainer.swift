@@ -1,13 +1,18 @@
 import SwiftUI
 import Combine
 import SwiftDux
+import AppNavigation
 import Dispatch
 
-struct TodoListContainer : ConnectableView {
+struct TodoListContainer : ConnectableView, Equatable {
   @Environment(\.horizontalSizeClass) private var sizeClass
   @SwiftUI.State private var animate: Bool = false
   
-  var id: String
+  @WaypointParameter var id: String!
+  
+  static func ==(lhs: Self, rhs: Self) -> Bool {
+    lhs.id == rhs.id
+  }
   
   func map(state: AppState, binder: ActionBinder) -> Props? {
     guard let todoList = state.todoLists[id] else { return nil }
@@ -31,7 +36,6 @@ struct TodoListContainer : ConnectableView {
       NewTodoRow(text: props.$newTodoText, onAddTodo: props.onAddTodo).padding()
       renderList(props: props)
     }
-    .showSplitViewDisplayModeButton(true)
   }
   
   func renderList(props: Props) -> some View {
@@ -42,13 +46,9 @@ struct TodoListContainer : ConnectableView {
       .onMove(perform: props.moveTodoLists)
       .onDelete(perform: props.removeTodoLists)
     }
+    .listStyle(PlainListStyle())
     .navigationBarTitle(Text(""), displayMode: .inline)
-    .animation(animate ? .default : nil)
-    .onAppear {
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-        animate = true
-      }
-    }
+    //.animation(.default)
   }
 }
 
@@ -70,7 +70,7 @@ public enum TodoListContainer_Previews: PreviewProvider {
   }
   
   public static var previews: some View {
-    TodoListContainer(id: "123")
+    TodoListContainer()
     .provideStore(store)
   }
 }
